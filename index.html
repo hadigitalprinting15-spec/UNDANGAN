@@ -1,708 +1,205 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#17120d">
-<meta name="description" content="Katalog Undangan & Buku Yasin ARANSHA MEDIA — Percetakan & Digital Printing">
-<title>ARANSHA MEDIA — Katalog Cetak Premium</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f7f2ea;--paper:#fffdf9;--ink:#211a14;--muted:#74685c;--gold:#b48a45;--gold2:#d7b06a;--dark:#17120d;--line:#e9dfd2;--wa:#25d366;--danger:#d9534f;--shadow:0 20px 60px rgba(45,29,12,.10)}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}.container{width:min(1200px,94%);margin:auto}
-header{position:sticky;top:0;z-index:50;background:rgba(23,18,13,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(215,176,106,.2)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:12px;color:#fff}.brand img{width:48px;height:48px;object-fit:contain;border-radius:10px;background:#fff}.brand strong{font-size:16px;letter-spacing:1.5px}.brand span{display:block;color:#cbbda9;font-size:9px;letter-spacing:2px;margin-top:1px}
-.nav-right{display:flex;align-items:center;gap:20px}
-.navlinks{display:flex;align-items:center;gap:20px;color:#eee7dc;font-size:13px;font-weight:600}
-.navlinks a:hover{color:var(--gold2)}
-.admin-btns-wrapper{display:flex;align-items:center;gap:10px}
-.btn-admin-login{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#20170d;border:none;padding:8px 16px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;transition:.2s}
-.btn-admin-login:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(215,176,106,.3)}
-.menu{display:none;background:none;border:0;color:#fff;font-size:27px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Produk & Admin Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --gold: #d97706;
+            --gold-hover: #b45309;
+            --border-color: #334155;
+        }
 
-.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 85% 20%,rgba(180,138,69,.25),transparent 30%),linear-gradient(135deg,#1b1510,#2b2117);color:#fff;padding:86px 0}.hero:after{content:"";position:absolute;inset:auto -10% -65% -10%;height:380px;border-radius:50%;background:rgba(215,176,106,.07);filter:blur(30px)}.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:60px}.eyebrow{display:inline-flex;border:1px solid rgba(215,176,106,.45);color:#e5c88e;padding:8px 13px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.5px;margin-bottom:18px}.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(48px,7vw,78px);line-height:.9;font-weight:600;margin-bottom:22px}.hero h1 em{color:#dfbb78;font-style:normal}.hero p{color:#d8cfc2;max-width:620px;font-size:16px;margin-bottom:30px}.btns{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);padding:13px 19px;border-radius:12px;font-weight:800;cursor:pointer;transition:.2s}.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));border-color:transparent;color:#20170d}.btn-dark{background:#211910;color:#fff;border-color:#665033}.btn-danger{background:var(--danger);color:#fff;border-color:transparent}.btn:hover{transform:translateY(-2px)}.hero-card{background:#fff;padding:12px;border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.35);transform:rotate(2deg)}.hero-photo{height:440px;border-radius:20px;display:flex;align-items:end;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#dbc69d,#765d38)}.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}.hero-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;color:#fff;font-family:"Cormorant Garamond",serif;font-size:52px;background:radial-gradient(circle at 50% 25%,#d7b06a,#50391e 70%)}
-section{padding:76px 0}.section-head{text-align:center;margin-bottom:28px}.kicker{font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px}.section-head h2{font-family:"Cormorant Garamond",serif;font-size:48px;line-height:1.05;margin:5px 0 8px}.section-head p{color:var(--muted)}
-.toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:22px}.search{flex:1;min-width:230px;position:relative}.search input{width:100%;border:1px solid var(--line);background:var(--paper);padding:14px 16px;border-radius:14px;outline:none}.search input:focus{border-color:var(--gold)}.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:var(--paper);padding:10px 14px;border-radius:30px;cursor:pointer;font-size:12px;font-weight:800}.filter.active,.filter:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.product{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 35px rgba(45,29,12,.05);transition:.25s;position:relative}.product:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.product-img{height:330px;background:#eee6db;position:relative;overflow:hidden}.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s}.product:hover .product-img img{transform:scale(1.035)}.tag{position:absolute;top:12px;left:12px;background:rgba(23,18,13,.88);color:#fff;padding:7px 10px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1px}.img-count-badge{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.65);color:#fff;padding:4px 8px;border-radius:12px;font-size:10px;font-weight:700}.product-body{padding:19px}.product-body small{color:var(--gold);font-weight:900;letter-spacing:1px}.product-body h3{font-family:"Cormorant Garamond",serif;font-size:27px;line-height:1.05;margin:6px 0}.product-body p{color:var(--muted);font-size:13px;min-height:43px}.meta{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{font-size:10px;border:1px solid var(--line);padding:5px 8px;border-radius:20px;color:#66594d}.price{font-weight:900;font-size:16px;margin:10px 0 2px;color:#20170d}.qty-badge{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:12px;display:block}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions .btn{padding:11px 8px;font-size:12px}.admin-actions{display:flex;gap:6px;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}.admin-actions .btn{flex:1;padding:8px;font-size:11px}
-.features{background:#201810;color:#fff}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.feature{border:1px solid rgba(215,176,106,.2);padding:24px;border-radius:18px;background:rgba(255,255,255,.03)}.feature b{display:block;margin-bottom:7px}.feature p{color:#cfc3b3;font-size:12px}
-.cta{padding:0 0 76px}.cta-box{background:linear-gradient(135deg,#3a2a18,#1d160f);border:1px solid rgba(215,176,106,.25);color:#fff;border-radius:28px;padding:50px;text-align:center}.cta-box h2{font-family:"Cormorant Garamond",serif;font-size:46px}.cta-box p{color:#d7cbb9;margin:8px auto 24px;max-width:650px}
-footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}.footer-grid h3{color:#fff;margin-bottom:10px}.footer-grid p,.footer-grid li{font-size:12px;color:#a99d8e}.footer-grid ul{list-style:none}.copyright{border-top:1px solid #30271e;margin-top:28px;padding-top:18px;font-size:11px;color:#887c6f}
-.wa{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--wa);color:#fff;font-size:28px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:80}.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}.modal.show{display:flex}.modal-box{width:min(860px,100%);max-height:92vh;overflow:auto;background:var(--paper);border-radius:24px;padding:20px;position:relative}.close{position:absolute;right:14px;top:9px;border:0;background:#21180f;color:#fff;width:38px;height:38px;border-radius:50%;font-size:23px;cursor:pointer;z-index:2}.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.modal-img{height:460px;border-radius:18px;overflow:hidden;background:#eee5d9;position:relative}.modal-img img{width:100%;height:100%;object-fit:cover}.modal-info{padding:20px 10px}.modal-info small{color:var(--gold);font-weight:900}.modal-info h2{font-family:"Cormorant Garamond",serif;font-size:42px;line-height:1.02;margin:5px 0 12px}.modal-info p{color:var(--muted);font-size:13px}.detail{margin:18px 0;border-top:1px solid var(--line)}.detail div{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}.detail strong{color:#6e6154}.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}
-.slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(23,18,13,.75);color:#fff;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-weight:bold;font-size:16px;z-index:5}.slider-btn.prev{left:10px}.slider-btn.next{right:10px}.slider-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px}.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer}.dot.active{background:var(--gold2);width:12px;border-radius:10px}
-.form-group{margin-bottom:14px;text-align:left}.form-group label{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--dark)}.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
-.gallery-manage{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-top:10px}.gallery-thumb{position:relative;height:90px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}.gallery-thumb img{width:100%;height:100%;object-fit:cover}.gallery-thumb-remove{position:absolute;top:3px;right:3px;background:rgba(217,83,79,.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-card{max-width:560px;margin:auto}.grid{grid-template-columns:repeat(2,1fr)}.feature-grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.menu{display:block}.modal-grid{grid-template-columns:1fr}.modal-img{height:360px}}
-@media(max-width:560px){.hero{padding:65px 0}.hero h1{font-size:54px}.grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}.product-img{height:390px}.section-head h2{font-size:40px}.toolbar{align-items:stretch}.filters{width:100%}.filter{flex:1}.actions{grid-template-columns:1fr}.cta-box{padding:35px 20px}.cta-box h2{font-size:38px}.footer-grid{grid-template-columns:1fr}.modal-img{height:300px}}
-</style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Modal Layout */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .modal-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-info small {
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .modal-info h2 {
+            margin: 0;
+            color: #fff;
+        }
+
+        .modal-info p {
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .detail {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .detail div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: #fff;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--gold-hover);
+        }
+    </style>
 </head>
 <body>
-<header>
-  <div class="container nav">
-    <a href="#home" class="brand">
-      <img src="LOGO%20ARANSHA.jpg" alt="ARANSHA MEDIA" onerror="this.style.display='none'">
-      <div><strong>ARANSHA MEDIA</strong><span>PERCETAKAN & DIGITAL PRINTING</span></div>
-    </a>
-    <div class="nav-right">
-      <nav class="navlinks">
-        <a href="#home">Beranda</a>
-        <a href="#produk">Katalog</a>
-        <a href="#keunggulan">Keunggulan</a>
-        <a href="#kontak">Kontak</a>
-      </nav>
-      
-      <div class="admin-btns-wrapper">
-        <button id="adminLoginBtn" class="btn-admin-login" onclick="openLoginModal()">Login Admin</button>
-        <button id="adminAddBtn" class="btn-admin-login" style="display:none;" onclick="openEditModal(null)">+ Tambah Produk</button>
-        <button id="adminLogoutBtn" class="btn btn-dark" style="padding:6px 12px; font-size:11px; display:none;" onclick="logoutAdmin()">Logout</button>
-      </div>
 
-      <button class="menu" onclick="document.querySelector('.navlinks').style.display=document.querySelector('.navlinks').style.display==='flex'?'none':'flex'">☰</button>
-    </div>
-  </div>
-</header>
-
-<main>
-<section class="hero" id="home">
-  <div class="container hero-grid">
-    <div>
-      <span class="eyebrow">✦ KATALOG CETAK PREMIUM</span>
-      <h1>Setiap Momen,<br>Punya <em>Cerita.</em></h1>
-      <p>Temukan koleksi Undangan Pernikahan, Buku Yasin, Khitanan, Aqiqah, dan Ulang Tahun dari ARANSHA MEDIA. Khusus pemesanan Undangan minimal 100 pcs ke atas.</p>
-      <div class="btns">
-        <a class="btn btn-gold" href="#produk">Lihat Katalog</a>
-        <a class="btn btn-dark" target="_blank" href="https://wa.me/6281227267303?text=Halo%20ARANSHA%20MEDIA,%20saya%20ingin%20konsultasi%20katalog%20produk.">WhatsApp Kami</a>
-      </div>
-    </div>
-    <div class="hero-card">
-      <div class="hero-photo" id="heroPhoto">
-        <div class="hero-placeholder">Katalog<br>Premium</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="produk">
-  <div class="container">
-    <div class="section-head">
-      <div class="kicker">KOLEKSI ARANSHA MEDIA</div>
-      <h2>Katalog Produk</h2>
-      <p>Pilih kategori untuk memfilter pencarian berdasarkan kebutuhan acara Anda.</p>
-    </div>
-    <div class="toolbar">
-      <div class="search">
-        <input id="search" type="search" placeholder="Cari kode, nama, ukuran, atau bahan..." oninput="render()">
-      </div>
-      <div class="filters" id="filters"></div>
-    </div>
-    <div class="grid" id="productGrid"></div>
-  </div>
-</section>
-
-<section class="features" id="keunggulan">
-  <div class="container">
-    <div class="section-head">
-      <div class="kicker">KENAPA ARANSHA MEDIA</div>
-      <h2 style="color:#fff">Dibuat untuk Memudahkan</h2>
-      <p style="color:#cfc3b3">Dari memilih desain sampai menghubungi kami.</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature"><b>✦ Kategori Terstruktur</b><p>Undangan Pernikahan, Buku Yasin, Khitanan, Aqiqah, dan Ulang Tahun terpisah dengan jelas.</p></div>
-      <div class="feature"><b>✦ Detail Produk Lengkap</b><p>Setiap produk menampilkan ukuran, jenis bahan, dan foto produk yang detail.</p></div>
-      <div class="feature"><b>✦ Fleksibel Tanpa Minimal</b><p>Buku Yasin dan produk cetak lainnya dapat dipesan tanpa batasan minimal order.</p></div>
-      <div class="feature"><b>✦ Tampilan Responsif</b><p>Sangat nyaman diakses melalui ponsel, tablet, maupun komputer.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="cta" id="kontak">
-  <div class="container">
-    <div class="cta-box">
-      <div class="kicker">KONSULTASI</div>
-      <h2>Sudah menemukan desain yang Anda suka?</h2>
-      <p>Kirim kode katalog kepada ARANSHA MEDIA. Kami siap membantu pemilihan bahan, ukuran, dan jumlah pesanan.</p>
-      <a class="btn btn-gold" target="_blank" href="https://wa.me/6281227267303?text=Halo%20ARANSHA%20MEDIA,%20saya%20ingin%20konsultasi%20produk%20cetak.">💬 Chat WhatsApp</a>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h3>ARANSHA MEDIA</h3>
-        <p>Percetakan & Digital Printing — penyedia jasa cetak undangan pernikahan, buku yasin, undangan khitanan, aqiqah, ulang tahun, dan produk percetakan lainnya.</p>
-      </div>
-      <div>
-        <h3>Kategori Produk</h3>
-        <ul>
-          <li>WD — UNDANGAN PERNIKAHAN</li>
-          <li>YS — BUKU YASIN</li>
-          <li>KH — UNDANGAN KHITANAN</li>
-          <li>AQ — UNDANGAN AQIQAH</li>
-          <li>UT — UNDANGAN ULANG TAHUN</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Hubungi Kami</h3>
-        <p>WhatsApp: 0812-2726-7303</p>
-        <p>Email: aranshamedia@gmail.com</p>
-        <p>Alamat: Kp. Sidodadi, RT.08 / RW.02, Kel. Sapuran, Kec. Sapuran, Kab. Wonosobo</p>
-        <p>Sebutkan kode katalog saat melakukan pemesanan.</p>
-      </div>
-    </div>
-    <div class="copyright">© <span id="year"></span> ARANSHA MEDIA. All rights reserved.</div>
-  </div>
-</footer>
-
-<a class="wa" target="_blank" href="https://wa.me/6281227267303?text=Halo%20ARANSHA%20MEDIA,%20saya%20ingin%20melihat%20katalog%20produk.">◉</a>
-
-<!-- MODAL DETAIL PRODUK -->
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-box">
-    <button class="close" onclick="closeModal()">×</button>
-    <div class="modal-grid">
-      <div class="modal-img" id="modalImgContainer">
-        <img id="mImg" alt="">
-        <button class="slider-btn prev" id="mPrevBtn" onclick="changeSlide(-1)">❮</button>
-        <button class="slider-btn next" id="mNextBtn" onclick="changeSlide(1)">❯</button>
-        <div class="slider-dots" id="mDots"></div>
-      </div>
-      <div class="modal-info">
-        <small id="mGroup"></small>
-        <h2 id="mTitle"></h2>
-        <p id="mDesc"></p>
-        <div class="detail">
-          <div><strong>Kode</strong><span id="mCode"></span></div>
-          <div><strong>Ukuran</strong><span id="mSize"></span></div>
-          <div><strong>Bahan</strong><span id="mPaper"></span></div>
-          <div><strong>Harga Estimasi</strong><span id="mPrice"></span></div>
-          <div id="mBulkRow" style="display:none;"><strong>Minimal Order</strong><span id="mBulkPrice" style="color:var(--gold); font-weight:800;">Minimal 100 pcs</span></div>
-        </div>
-        <a id="mWa" class="btn btn-gold" target="_blank" style="width:100%">💬 Pesan / Tanya Detail Produk</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL LOGIN ADMIN -->
-<div class="modal" id="loginModal" onclick="if(event.target===this)closeLoginModal()">
-  <div class="modal-box" style="max-width:400px; text-align:center;">
-    <button class="close" onclick="closeLoginModal()">×</button>
-    <h2 style="font-family:'Cormorant Garamond',serif; font-size:32px; margin-bottom:15px;">Login Admin</h2>
-    <div class="form-group">
-      <label>Password Admin</label>
-      <input type="password" id="adminPassInput" placeholder="Masukkan password admin">
-    </div>
-    <button class="btn btn-gold" style="width:100%; margin-top:10px;" onclick="loginAdmin()">Login</button>
-  </div>
-</div>
-
-<!-- MODAL EDIT / TAMBAH PRODUK ADMIN -->
-<div class="modal" id="editModal" onclick="if(event.target===this)closeEditModal()">
-  <div class="modal-box" style="max-width:560px;">
-    <button class="close" onclick="closeEditModal()">×</button>
-    <h2 id="editModalTitle" style="font-family:'Cormorant Garamond',serif; font-size:32px; margin-bottom:15px;">Edit Produk</h2>
-    <form id="editForm" onsubmit="saveProduct(event)">
-      <input type="hidden" id="editOriginalCode">
-      <div class="form-group">
-        <label>Kode Produk</label>
-        <input type="text" id="editCode" required placeholder="Contoh: WD-001">
-      </div>
-      <div class="form-group">
-        <label>Kategori</label>
-        <select id="editGroup" required onchange="toggleBulkInputByGroup(this.value)">
-          <option value="WD">WD - UNDANGAN PERNIKAHAN</option>
-          <option value="YS">YS - BUKU YASIN</option>
-          <option value="KH">KH - UNDANGAN KHITANAN</option>
-          <option value="AQ">AQ - UNDANGAN AQIQAH</option>
-          <option value="UT">UT - UNDANGAN ULANG TAHUN</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Nama Produk</label>
-        <input type="text" id="editTitle" required placeholder="Contoh: Undangan Jawa Premium">
-      </div>
-      
-      <!-- MANAJEMEN BANYAK GAMBAR (MULTI-IMAGE) -->
-      <div class="form-group">
-        <label>Kelola Gambar Produk (Bisa Banyak Gambar)</label>
-        <div style="display:flex; gap:8px;">
-          <input type="text" id="editImageUrl" placeholder="Tempel URL Gambar baru..." style="flex:1;">
-          <button type="button" class="btn btn-dark" style="padding:8px 12px; font-size:12px;" onclick="addUrlImage()">+ Tambah URL</button>
-        </div>
-        <input type="file" id="editImageFiles" accept="image/*" multiple style="margin-top:8px;" onchange="handleMultipleUploads(event)">
-        <small style="color:var(--muted); font-size:11px; display:block; margin-top:4px;">Pilih atau upload beberapa file foto sekaligus. Klik (×) pada gambar untuk menghapus.</small>
+    <div class="container">
+        <h1>Katalog Produk</h1>
+        <p>Silakan kelola atau lihat detail produk di bawah ini.</p>
         
-        <div class="gallery-manage" id="galleryManageBox"></div>
-      </div>
-
-      <div class="form-group">
-        <label>Ukuran</label>
-        <input type="text" id="editSize" required placeholder="Contoh: 11,8 × 15,7 cm">
-      </div>
-      <div class="form-group">
-        <label>Jenis Bahan / Kertas</label>
-        <select id="editPaperSelect" onchange="checkCustomPaper(this)" required>
-          <option value="Art Carton">Art Carton</option>
-          <option value="Ivory">Ivory</option>
-          <option value="Jasmine">Jasmine</option>
-          <option value="HVS">HVS</option>
-          <option value="Art Paper">Art Paper</option>
-          <option value="BC / Brief Card (TIK)">BC / Brief Card (TIK)</option>
-          <option value="Cover Bludru / Hardcover">Cover Bludru / Hardcover</option>
-          <option value="Sesuai pilihan">Sesuai pilihan</option>
-          <option value="Lainnya">Lainnya (Ketik Manual)...</option>
-        </select>
-        <input type="text" id="editPaperCustom" style="display:none; margin-top:8px;" placeholder="Masukkan jenis bahan manual...">
-      </div>
-      <div class="form-group">
-        <label>Harga Satuan / Dasar</label>
-        <input type="text" id="editPrice" required placeholder="Contoh: Hubungi Kami / Rp 2.500">
-      </div>
-
-      <div class="form-group" id="bulkPriceFormGroup">
-        <label>Ket. Minimum Order (Undangan)</label>
-        <input type="text" id="editBulkPrice" placeholder="Minimal 100 pcs (Menyesuaikan jumlah pesanan)">
-      </div>
-
-      <div class="form-group">
-        <label>Deskripsi Singkat</label>
-        <textarea id="editDesc" rows="3" required placeholder="Deskripsi ringkas produk..."></textarea>
-      </div>
-      <button type="submit" class="btn btn-gold" style="width:100%; margin-top:10px;">Simpan Perubahan</button>
-    </form>
-  </div>
-</div>
-
-<script>
-const REPO='hadigitalprinting15-spec/UNDANGAN';
-const FOLDER='GAMBAR/katalog undangan';
-const RAW_BASE='https://raw.githubusercontent.com/hadigitalprinting15-spec/UNDANGAN/main/';
-const WA='6281227267303';
-const ADMIN_PASS = 'admin123';
-
-const CATEGORIES = {
-  'WD': 'UNDANGAN PERNIKAHAN',
-  'YS': 'BUKU YASIN',
-  'KH': 'UNDANGAN KHITANAN',
-  'AQ': 'UNDANGAN AQIQAH',
-  'UT': 'UNDANGAN ULANG TAHUN'
-};
-
-const defaultProducts = [
-  { code: 'WD-001', group: 'WD', title: 'Undangan Jawa Premium', size: '11,8 × 15,7 cm', paper: 'Ivory', price: 'Hubungi Kami', bulkPrice: 'Minimal 100 pcs', desc: 'Undangan pernikahan nuansa Jawa yang elegan dan berkelas.', images: [] },
-  { code: 'WD-002', group: 'WD', title: 'Undangan Wayang Elegan', size: '10 × 15,7 cm', paper: 'Ivory', price: 'Hubungi Kami', bulkPrice: 'Minimal 100 pcs', desc: 'Konsep wayang klasik dengan sentuhan mewah.', images: [] },
-  { code: 'WD-003', group: 'WD', title: 'Wedding Classic', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', bulkPrice: 'Minimal 100 pcs', desc: 'Desain pernikahan klasik yang dapat disesuaikan.', images: [] },
-  { code: 'YS-001', group: 'YS', title: 'Buku Yasin Softcover', size: 'Custom', paper: 'Art Paper / HVS', price: 'Hubungi Kami', bulkPrice: '', desc: 'Buku Yasin softcover dengan cetakan rapi dan pilihan isi lengkap. Bebas jumlah pesanan.', images: [] },
-  { code: 'YS-002', group: 'YS', title: 'Buku Yasin Softcover Elegan', size: 'Custom', paper: 'Art Carton / RCP', price: 'Hubungi Kami', bulkPrice: '', desc: 'Buku Yasin softcover elegan dengan pilihan cetak foil emas/perak.', images: [] },
-  { code: 'YS-003', group: 'YS', title: 'Buku Yasin Premium Bludru', size: 'Custom', paper: 'Cover Bludru / Hardcover', price: 'Hubungi Kami', bulkPrice: '', desc: 'Buku Yasin eksklusif dan tahan lama.', images: [] },
-  { code: 'KH-001', group: 'KH', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', bulkPrice: 'Minimal 100 pcs', desc: 'Undangan acara syukuran khitanan putra Anda.', images: [] },
-  { code: 'AQ-001', group: 'AQ', title: 'Undangan Aqiqah Lucu', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', bulkPrice: 'Minimal 100 pcs', desc: 'Undangan syukuran aqiqah untuk buah hati tercinta.', images: [] },
-  { code: 'UT-001', group: 'UT', title: 'Undangan Ulang Tahun Ceria', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', bulkPrice: 'Minimal 100 pcs', desc: 'Undangan ulang tahun dengan tema penuh warna.', images: [] }
-];
-
-let products = JSON.parse(localStorage.getItem('aransha_products_v2')) || defaultProducts;
-let isAdmin = localStorage.getItem('aransha_is_admin') === 'true';
-
-let files=[]; let active='Semua';
-let editImagesList = []; // Temp penampung foto saat edit
-let currentModalImages = []; // Temp foto saat modal detail dibuka
-let currentSlideIndex = 0;
-
-function norm(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'')}
-function fallback(code){return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000"><rect width="100%" height="100%" fill="#eee6db"/><text x="50%" y="48%" text-anchor="middle" font-family="Georgia" font-size="72" fill="#9b7841">${code}</text><text x="50%" y="55%" text-anchor="middle" font-family="Arial" font-size="24" fill="#74685c">ARANSHA MEDIA</text></svg>`)}
-
-function getProductImages(code){
-  const p = products.find(x => x.code === code);
-  if (p && p.images && p.images.length > 0) return p.images;
-  if (p && p.customImage) return [p.customImage];
-  
-  const n=norm(code);
-  const f=files.find(x=>norm(x.name).includes(n));
-  const autoUrl = f ? f.download_url : (RAW_BASE+encodeURIComponent(FOLDER).replace(/%2F/g,'/')+'/'+encodeURIComponent(code)+'.jpg');
-  return [autoUrl];
-}
-
-function isUndanganGroup(group){
-  return ['WD', 'KH', 'AQ', 'UT'].includes(group);
-}
-
-function wa(code,title,group){
-  const catName = CATEGORIES[group] || group;
-  const isUnd = isUndanganGroup(group);
-  const minText = isUnd ? ' (min. 100 pcs)' : '';
-  return 'https://wa.me/'+WA+'?text='+encodeURIComponent('Halo ARANSHA MEDIA, saya berminat dengan katalog '+catName+' ['+code+'] — '+title+minText+'. Mohon info pemesanan dan penawaran harganya.');
-}
-
-function updateAdminUI(){
-  const loginBtn = document.getElementById('adminLoginBtn');
-  const addBtn = document.getElementById('adminAddBtn');
-  const logoutBtn = document.getElementById('adminLogoutBtn');
-  
-  if(isAdmin){
-    if(loginBtn) loginBtn.style.display = 'none';
-    if(addBtn) addBtn.style.display = 'inline-block';
-    if(logoutBtn) logoutBtn.style.display = 'inline-block';
-  } else {
-    if(loginBtn) loginBtn.style.display = 'inline-block';
-    if(addBtn) addBtn.style.display = 'none';
-    if(logoutBtn) logoutBtn.style.display = 'none';
-  }
-}
-
-function render(){
-  const q=document.getElementById('search').value.trim().toLowerCase();
-  const list=products.filter(p=>{
-    const categoryName = CATEGORIES[p.group] || p.group;
-    const matchGroup = (active==='Semua' || p.group===active || categoryName===active);
-    const matchSearch = (p.code+' '+p.title+' '+p.size+' '+p.paper+' '+p.desc+' '+categoryName).toLowerCase().includes(q);
-    return matchGroup && matchSearch;
-  });
-  
-  const grid=document.getElementById('productGrid');
-  if(!list.length){
-    grid.innerHTML='<div class="empty">Produk tidak ditemukan. Silakan cari dengan kata kunci lain atau pilih kategori Semua.</div>';
-    return;
-  }
-  
-  grid.innerHTML=list.map(p=>{
-    const catLabel = CATEGORIES[p.group] || p.group;
-    const imgs = getProductImages(p.code);
-    const mainImg = imgs[0];
-    const isUnd = isUndanganGroup(p.group);
-    const bulkTxt = p.bulkPrice ? p.bulkPrice : 'Minimal 100 pcs';
-
-    return `<article class="product">
-      <div class="product-img">
-        <span class="tag">${catLabel} · ${p.code}</span>
-        ${imgs.length > 1 ? `<span class="img-count-badge">📷 ${imgs.length} Foto</span>` : ''}
-        <img src="${mainImg}" alt="${p.code} ${p.title}" loading="lazy" onerror="this.onerror=null;this.src=fallback('${p.code}')">
-      </div>
-      <div class="product-body">
-        <small>${p.code}</small>
-        <h3>${p.title}</h3>
-        <p>${p.desc}</p>
-        <div class="meta">
-          <span class="chip">${p.size}</span>
-          <span class="chip">${p.paper}</span>
+        <!-- Modal Detail Produk -->
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <div class="slide-dots" id="mDots"></div>
+                <div class="modal-info">
+                    <small id="mGroup"></small>
+                    <h2 id="mTitle"></h2>
+                    <p id="mDesc"></p>
+                    <div class="detail">
+                        <div><strong>Kode</strong><span id="mCode"></span></div>
+                        <div><strong>Ukuran</strong><span id="mSize"></span></div>
+                        <div><strong>Bahan</strong><span id="mPaper"></span></div>
+                        <div><strong>Harga Estimasi</strong><span id="mPrice"></span></div>
+                        <div id="mBulkRow" style="display:none;">
+                            <strong>Minimal Order</strong><span id="mBulkPrice" style="color:var(--gold)"></span>
+                        </div>
+                        <a id="mWa" class="btn btn-gold" target="_blank" style="width:100%; margin-top: 15px;">💬 Pesan / Tanya Detail Produk</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="price">${p.price}</div>
-        ${isUnd ? `<span class="qty-badge">🏷️ ${bulkTxt}</span>` : ''}
-        <div class="actions">
-          <button class="btn btn-dark" onclick="detail('${p.code}')">Detail</button>
-          <a class="btn btn-gold" target="_blank" href="${wa(p.code,p.title,p.group)}">WhatsApp</a>
-        </div>
-        ${isAdmin ? `<div class="admin-actions">
-          <button class="btn btn-gold" onclick="openEditModal('${p.code}')">✏️ Edit</button>
-          <button class="btn btn-danger" onclick="deleteProduct('${p.code}')">🗑️ Hapus</button>
-        </div>` : ''}
-      </div>
-    </article>`;
-  }).join('');
-}
-
-function buildFilters(){
-  const uniqueGroups = [...new Set(products.map(p=>p.group))];
-  const filterButtons = ['Semua', ...uniqueGroups.map(g => CATEGORIES[g] || g)];
-  document.getElementById('filters').innerHTML=filterButtons.map(cat=>`<button class="filter ${cat===active?'active':''}" onclick="setGroup('${cat}')">${cat}</button>`).join('');
-}
-
-function setGroup(cat){
-  active=cat;
-  buildFilters();
-  render();
-  document.getElementById('produk').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function detail(code){
-  const p=products.find(x=>x.code===code);
-  if(!p)return;
-  const catLabel = CATEGORIES[p.group] || p.group;
-  document.getElementById('mGroup').textContent=catLabel+' · '+p.code;
-  document.getElementById('mTitle').textContent=p.title;
-  document.getElementById('mDesc').textContent=p.desc;
-  document.getElementById('mCode').textContent=p.code;
-  document.getElementById('mSize').textContent=p.size;
-  document.getElementById('mPaper').textContent=p.paper;
-  document.getElementById('mPrice').textContent=p.price;
-
-  const isUnd = isUndanganGroup(p.group);
-  const mBulkRow = document.getElementById('mBulkRow');
-  if(isUnd){
-    mBulkRow.style.display = 'flex';
-    document.getElementById('mBulkPrice').textContent = p.bulkPrice || 'Minimal 100 pcs';
-  } else {
-    mBulkRow.style.display = 'none';
-  }
-
-  currentModalImages = getProductImages(p.code);
-  currentSlideIndex = 0;
-  renderSlider();
-
-  document.getElementById('mWa').href=wa(p.code,p.title,p.group);
-  document.getElementById('modal').classList.add('show');
-  document.body.style.overflow='hidden';
-}
-
-function renderSlider(){
-  const imgEl = document.getElementById('mImg');
-  const prevBtn = document.getElementById('mPrevBtn');
-  const nextBtn = document.getElementById('mNextBtn');
-  const dotsEl = document.getElementById('mDots');
-
-  imgEl.src = currentModalImages[currentSlideIndex];
-  imgEl.onerror = () => { imgEl.onerror=null; imgEl.src=fallback('ARANSHA'); };
-
-  if(currentModalImages.length > 1){
-    prevBtn.style.display = 'block';
-    nextBtn.style.display = 'block';
-    dotsEl.innerHTML = currentModalImages.map((_, idx) => 
-      `<span class="dot ${idx === currentSlideIndex ? 'active' : ''}" onclick="setSlide(${idx})"></span>`
-    ).join('');
-  } else {
-    prevBtn.style.display = 'none';
-    nextBtn.style.display = 'none';
-    dotsEl.innerHTML = '';
-  }
-}
-
-function changeSlide(dir){
-  currentSlideIndex = (currentSlideIndex + dir + currentModalImages.length) % currentModalImages.length;
-  renderSlider();
-}
-
-function setSlide(idx){
-  currentSlideIndex = idx;
-  renderSlider();
-}
-
-function closeModal(){
-  document.getElementById('modal').classList.remove('show');
-  document.body.style.overflow='';
-}
-
-function openLoginModal(){
-  document.getElementById('loginModal').classList.add('show');
-}
-function closeLoginModal(){
-  document.getElementById('loginModal').classList.remove('show');
-  document.getElementById('adminPassInput').value = '';
-}
-function loginAdmin(){
-  const pass = document.getElementById('adminPassInput').value;
-  if(pass === ADMIN_PASS){
-    isAdmin = true;
-    localStorage.setItem('aransha_is_admin', 'true');
-    updateAdminUI();
-    render();
-    closeLoginModal();
-    alert('Berhasil Login sebagai Admin!');
-  } else {
-    alert('Password Admin Salah!');
-  }
-}
-function logoutAdmin(){
-  isAdmin = false;
-  localStorage.setItem('aransha_is_admin', 'false');
-  updateAdminUI();
-  render();
-  alert('Anda telah Logout.');
-}
-
-function toggleBulkInputByGroup(group){
-  const bulkGroup = document.getElementById('bulkPriceFormGroup');
-  if(isUndanganGroup(group)){
-    bulkGroup.style.display = 'block';
-  } else {
-    bulkGroup.style.display = 'none';
-  }
-}
-
-function renderEditGallery(){
-  const box = document.getElementById('galleryManageBox');
-  if(!editImagesList.length){
-    box.innerHTML = '<span style="color:var(--muted); font-size:12px; grid-column:1/-1;">Belum ada gambar diset.</span>';
-    return;
-  }
-  box.innerHTML = editImagesList.map((url, idx) => `
-    <div class="gallery-thumb">
-      <img src="${url}" alt="Foto ${idx+1}" onerror="this.onerror=null; this.src=fallback('Err');">
-      <button type="button" class="gallery-thumb-remove" onclick="removeImageFromEdit(${idx})">×</button>
     </div>
-  `).join('');
-}
 
-function addUrlImage(){
-  const input = document.getElementById('editImageUrl');
-  const url = input.value.trim();
-  if(url){
-    editImagesList.push(url);
-    input.value = '';
-    renderEditGallery();
-  }
-}
+    <!-- === KODE JAVASCRIPT === -->
+    <script>
+        // === KONFIGURASI CLOUDINARY ===
+        const CLOUDINARY_CLOUD_NAME = 'o1w0bczv';
+        const CLOUDINARY_UPLOAD_PRESET = 'oizwqsrr';
 
-function handleMultipleUploads(e){
-  const files = e.target.files;
-  if(files && files.length > 0){
-    Array.from(files).forEach(file => {
-      const reader = new FileReader();
-      reader.onload = function(evt){
-        editImagesList.push(evt.target.result);
-        renderEditGallery();
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-}
+        // Fungsi Helper untuk Upload Media ke Cloudinary
+        async function uploadToCloudinary(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
-function removeImageFromEdit(index){
-  editImagesList.splice(index, 1);
-  renderEditGallery();
-}
+            const resourceType = file.type.startsWith('video/') ? 'video' : 'image';
+            const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`;
 
-function openEditModal(code){
-  const isEdit = !!code;
-  document.getElementById('editModalTitle').textContent = isEdit ? 'Edit Produk' : 'Tambah Produk Baru';
-  document.getElementById('editOriginalCode').value = isEdit ? code : '';
-  
-  if(isEdit){
-    const p = products.find(x=>x.code===code);
-    if(!p) return;
-    document.getElementById('editCode').value = p.code;
-    document.getElementById('editGroup').value = p.group;
-    toggleBulkInputByGroup(p.group);
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Gagal mengunggah file ke Cloudinary');
+                }
 
-    document.getElementById('editTitle').value = p.title;
-    document.getElementById('editSize').value = p.size;
-    document.getElementById('editBulkPrice').value = p.bulkPrice || 'Minimal 100 pcs';
-    
-    editImagesList = [...getProductImages(p.code)];
-    renderEditGallery();
-    
-    const selectPaper = document.getElementById('editPaperSelect');
-    const customInput = document.getElementById('editPaperCustom');
-    let foundOption = Array.from(selectPaper.options).some(opt => opt.value === p.paper);
-    if(foundOption){
-      selectPaper.value = p.paper;
-      customInput.style.display = 'none';
-      customInput.value = '';
-    } else {
-      selectPaper.value = 'Lainnya';
-      customInput.style.display = 'block';
-      customInput.value = p.paper;
-    }
-    
-    document.getElementById('editPrice').value = p.price;
-    document.getElementById('editDesc').value = p.desc;
-  } else {
-    document.getElementById('editForm').reset();
-    document.getElementById('editPaperCustom').style.display = 'none';
-    editImagesList = [];
-    renderEditGallery();
-    toggleBulkInputByGroup('WD');
-  }
-  
-  document.getElementById('editModal').classList.add('show');
-}
+                const data = await response.json();
+                return data.secure_url;
+            } catch (error) {
+                console.error('Error Cloudinary Upload:', error);
+                alert('Gagal mengunggah media. Pastikan koneksi internet stabil.');
+                return null;
+            }
+        }
 
-function closeEditModal(){
-  document.getElementById('editModal').classList.remove('show');
-}
+        // Contoh Penggunaan Fungsi Modal
+        function showProductDetail(product) {
+            document.getElementById('mGroup').innerText = product.group || '';
+            document.getElementById('mTitle').innerText = product.title || '';
+            document.getElementById('mDesc').innerText = product.description || '';
+            document.getElementById('mCode').innerText = product.code || '-';
+            document.getElementById('mSize').innerText = product.size || '-';
+            document.getElementById('mPaper').innerText = product.paper || '-';
+            document.getElementById('mPrice').innerText = product.price || '-';
 
-function checkCustomPaper(select){
-  const customInput = document.getElementById('editPaperCustom');
-  if(select.value === 'Lainnya'){
-    customInput.style.display = 'block';
-    customInput.required = true;
-  } else {
-    customInput.style.display = 'none';
-    customInput.required = false;
-  }
-}
+            if (product.bulkPrice) {
+                document.getElementById('mBulkRow').style.display = 'flex';
+                document.getElementById('mBulkPrice').innerText = product.bulkPrice;
+            } else {
+                document.getElementById('mBulkRow').style.display = 'none';
+            }
 
-function saveProduct(e){
-  e.preventDefault();
-  const originalCode = document.getElementById('editOriginalCode').value;
-  const code = document.getElementById('editCode').value.trim();
-  const group = document.getElementById('editGroup').value;
-  const title = document.getElementById('editTitle').value.trim();
-  const size = document.getElementById('editSize').value.trim();
-  const bulkPrice = document.getElementById('editBulkPrice').value.trim() || 'Minimal 100 pcs';
-  
-  const paperSelect = document.getElementById('editPaperSelect').value;
-  const paperCustom = document.getElementById('editPaperCustom').value.trim();
-  const paper = (paperSelect === 'Lainnya') ? paperCustom : paperSelect;
-  
-  const price = document.getElementById('editPrice').value.trim();
-  const desc = document.getElementById('editDesc').value.trim();
-  
-  const newProductData = { 
-    code, group, title, size, paper, price, 
-    bulkPrice: isUndanganGroup(group) ? bulkPrice : '', 
-    desc, 
-    images: [...editImagesList] 
-  };
-  
-  if(originalCode){
-    const index = products.findIndex(x=>x.code===originalCode);
-    if(index !== -1){
-      products[index] = newProductData;
-    }
-  } else {
-    if(products.some(x=>x.code===code)){
-      alert('Kode produk sudah ada, silakan gunakan kode lain!');
-      return;
-    }
-    products.unshift(newProductData);
-  }
-  
-  localStorage.setItem('aransha_products_v2', JSON.stringify(products));
-  buildFilters();
-  render();
-  closeEditModal();
-  alert('Data produk berhasil disimpan!');
-}
+            const waMessage = encodeURIComponent(`Halo, saya tertarik dengan produk ${product.title} (Kode: ${product.code})`);
+            document.getElementById('mWa').href = `https://wa.me/6281234567890?text=${waMessage}`;
 
-function deleteProduct(code){
-  if(confirm('Apakah Anda yakin ingin menghapus produk '+code+'?')){
-    products = products.filter(x=>x.code!==code);
-    localStorage.setItem('aransha_products_v2', JSON.stringify(products));
-    buildFilters();
-    render();
-  }
-}
+            document.getElementById('productModal').style.display = 'flex';
+        }
 
-async function loadFiles(){
-  try{
-    const url='https://api.github.com/repos/'+REPO+'/contents/'+encodeURIComponent(FOLDER).replace(/%2F/g,'/')+'?ref=main';
-    const r=await fetch(url,{headers:{Accept:'application/vnd.github+json'}});
-    if(r.ok){
-      const data=await r.json();
-      files=Array.isArray(data)?data.filter(x=>x.type==='file'):[];
-      render();
-      setHero();
-    }
-  }catch(e){
-    console.log('GitHub API tidak tersedia, memakai URL gambar langsung.');
-  }
-}
-
-function setHero(){
-  const wd=products.find(p=>p.group==='WD');
-  if(!wd)return;
-  const imgs=getProductImages(wd.code);
-  document.getElementById('heroPhoto').innerHTML=`<img src="${imgs[0]}" alt="${wd.title}" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'hero-placeholder\'>Katalog<br>Premium</div>'">`;
-}
-
-document.getElementById('year').textContent=new Date().getFullYear();
-updateAdminUI();
-buildFilters();
-render();
-loadFiles();
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeLoginModal();closeEditModal();}});
-</script>
+        // Tutup Modal jika diklik luar kotak modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 </body>
 </html>
