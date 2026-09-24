@@ -10,39 +10,238 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f2ea;--paper:#fffdf9;--ink:#211a14;--muted:#74685c;--gold:#b48a45;--gold2:#d7b06a;--dark:#17120d;--line:#e9dfd2;--wa:#25d366;--shadow:0 20px 60px rgba(45,29,12,.10)}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}a{text-decoration:none;color:inherit}button,input{font:inherit}.container{width:min(1180px,92%);margin:auto}
-header{position:sticky;top:0;z-index:50;background:rgba(23,18,13,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(215,176,106,.2)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px;color:#fff}.brand img{width:48px;height:48px;object-fit:contain;border-radius:10px;background:#fff}.brand strong{font-size:16px;letter-spacing:1.5px}.brand span{display:block;color:#cbbda9;font-size:9px;letter-spacing:2px;margin-top:1px}.navlinks{display:flex;gap:24px;color:#eee7dc;font-size:13px;font-weight:600}.navlinks a:hover{color:var(--gold2)}.menu{display:none;background:none;border:0;color:#fff;font-size:27px}
-.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 85% 20%,rgba(180,138,69,.25),transparent 30%),linear-gradient(135deg,#1b1510,#2b2117);color:#fff;padding:86px 0}.hero:after{content:"";position:absolute;inset:auto -10% -65% -10%;height:380px;border-radius:50%;background:rgba(215,176,106,.07);filter:blur(30px)}.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:60px}.eyebrow{display:inline-flex;border:1px solid rgba(215,176,106,.45);color:#e5c88e;padding:8px 13px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.5px;margin-bottom:18px}.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(48px,7vw,78px);line-height:.9;font-weight:600;margin-bottom:22px}.hero h1 em{color:#dfbb78;font-style:normal}.hero p{color:#d8cfc2;max-width:620px;font-size:16px;margin-bottom:30px}.btns{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);padding:13px 19px;border-radius:12px;font-weight:800;cursor:pointer;transition:.2s}.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));border-color:transparent;color:#20170d}.btn-dark{background:#211910;color:#fff;border-color:#665033}.btn:hover{transform:translateY(-2px)}.hero-card{background:#fff;padding:12px;border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.35);transform:rotate(2deg)}.hero-photo{height:440px;border-radius:20px;display:flex;align-items:end;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#dbc69d,#765d38)}.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}.hero-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;color:#fff;font-family:"Cormorant Garamond",serif;font-size:52px;background:radial-gradient(circle at 50% 25%,#d7b06a,#50391e 70%)}
+:root{--bg:#f7f2ea;--paper:#fffdf9;--ink:#211a14;--muted:#74685c;--gold:#b48a45;--gold2:#d7b06a;--dark:#17120d;--line:#e9dfd2;--wa:#25d366;--danger:#d9534f;--shadow:0 20px 60px rgba(45,29,12,.10)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}.container{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:rgba(23,18,13,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(215,176,106,.2)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px;color:#fff}.brand img{width:48px;height:48px;object-fit:contain;border-radius:10px;background:#fff}.brand strong{font-size:16px;letter-spacing:1.5px}.brand span{display:block;color:#cbbda9;font-size:9px;letter-spacing:2px;margin-top:1px}.navlinks{display:flex;align-items:center;gap:20px;color:#eee7dc;font-size:13px;font-weight:600}.navlinks a:hover{color:var(--gold2)}.menu{display:none;background:none;border:0;color:#fff;font-size:27px}
+.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 85% 20%,rgba(180,138,69,.25),transparent 30%),linear-gradient(135deg,#1b1510,#2b2117);color:#fff;padding:86px 0}.hero:after{content:"";position:absolute;inset:auto -10% -65% -10%;height:380px;border-radius:50%;background:rgba(215,176,106,.07);filter:blur(30px)}.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:60px}.eyebrow{display:inline-flex;border:1px solid rgba(215,176,106,.45);color:#e5c88e;padding:8px 13px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.5px;margin-bottom:18px}.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(48px,7vw,78px);line-height:.9;font-weight:600;margin-bottom:22px}.hero h1 em{color:#dfbb78;font-style:normal}.hero p{color:#d8cfc2;max-width:620px;font-size:16px;margin-bottom:30px}.btns{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);padding:13px 19px;border-radius:12px;font-weight:800;cursor:pointer;transition:.2s}.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));border-color:transparent;color:#20170d}.btn-dark{background:#211910;color:#fff;border-color:#665033}.btn-danger{background:var(--danger);color:#fff;border-color:transparent}.btn:hover{transform:translateY(-2px)}.hero-card{background:#fff;padding:12px;border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.35);transform:rotate(2deg)}.hero-photo{height:440px;border-radius:20px;display:flex;align-items:end;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#dbc69d,#765d38)}.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}.hero-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;color:#fff;font-family:"Cormorant Garamond",serif;font-size:52px;background:radial-gradient(circle at 50% 25%,#d7b06a,#50391e 70%)}
 section{padding:76px 0}.section-head{text-align:center;margin-bottom:28px}.kicker{font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px}.section-head h2{font-family:"Cormorant Garamond",serif;font-size:48px;line-height:1.05;margin:5px 0 8px}.section-head p{color:var(--muted)}
 .toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:22px}.search{flex:1;min-width:230px;position:relative}.search input{width:100%;border:1px solid var(--line);background:var(--paper);padding:14px 16px;border-radius:14px;outline:none}.search input:focus{border-color:var(--gold)}.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:var(--paper);padding:10px 14px;border-radius:30px;cursor:pointer;font-size:12px;font-weight:800}.filter.active,.filter:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.product{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 35px rgba(45,29,12,.05);transition:.25s}.product:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.product-img{height:330px;background:#eee6db;position:relative;overflow:hidden}.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s}.product:hover .product-img img{transform:scale(1.035)}.tag{position:absolute;top:12px;left:12px;background:rgba(23,18,13,.88);color:#fff;padding:7px 10px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1px}.product-body{padding:19px}.product-body small{color:var(--gold);font-weight:900;letter-spacing:1px}.product-body h3{font-family:"Cormorant Garamond",serif;font-size:27px;line-height:1.05;margin:6px 0}.product-body p{color:var(--muted);font-size:13px;min-height:43px}.meta{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{font-size:10px;border:1px solid var(--line);padding:5px 8px;border-radius:20px;color:#66594d}.price{font-weight:900;font-size:17px;margin:10px 0 14px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions .btn{padding:11px 8px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.product{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 35px rgba(45,29,12,.05);transition:.25s;position:relative}.product:hover{transform:translateY(-5px);box-shadow:var(--shadow)}.product-img{height:330px;background:#eee6db;position:relative;overflow:hidden}.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s}.product:hover .product-img img{transform:scale(1.035)}.tag{position:absolute;top:12px;left:12px;background:rgba(23,18,13,.88);color:#fff;padding:7px 10px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1px}.product-body{padding:19px}.product-body small{color:var(--gold);font-weight:900;letter-spacing:1px}.product-body h3{font-family:"Cormorant Garamond",serif;font-size:27px;line-height:1.05;margin:6px 0}.product-body p{color:var(--muted);font-size:13px;min-height:43px}.meta{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{font-size:10px;border:1px solid var(--line);padding:5px 8px;border-radius:20px;color:#66594d}.price{font-weight:900;font-size:17px;margin:10px 0 14px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions .btn{padding:11px 8px;font-size:12px}.admin-actions{display:flex;gap:6px;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}.admin-actions .btn{flex:1;padding:8px;font-size:11px}
 .features{background:#201810;color:#fff}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.feature{border:1px solid rgba(215,176,106,.2);padding:24px;border-radius:18px;background:rgba(255,255,255,.03)}.feature b{display:block;margin-bottom:7px}.feature p{color:#cfc3b3;font-size:12px}
 .cta{padding:0 0 76px}.cta-box{background:linear-gradient(135deg,#3a2a18,#1d160f);border:1px solid rgba(215,176,106,.25);color:#fff;border-radius:28px;padding:50px;text-align:center}.cta-box h2{font-family:"Cormorant Garamond",serif;font-size:46px}.cta-box p{color:#d7cbb9;margin:8px auto 24px;max-width:650px}
 footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}.footer-grid h3{color:#fff;margin-bottom:10px}.footer-grid p,.footer-grid li{font-size:12px;color:#a99d8e}.footer-grid ul{list-style:none}.copyright{border-top:1px solid #30271e;margin-top:28px;padding-top:18px;font-size:11px;color:#887c6f}
 .wa{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--wa);color:#fff;font-size:28px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:80}.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}.modal.show{display:flex}.modal-box{width:min(860px,100%);max-height:92vh;overflow:auto;background:var(--paper);border-radius:24px;padding:20px;position:relative}.close{position:absolute;right:14px;top:9px;border:0;background:#21180f;color:#fff;width:38px;height:38px;border-radius:50%;font-size:23px;cursor:pointer;z-index:2}.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.modal-img{height:540px;border-radius:18px;overflow:hidden;background:#eee5d9}.modal-img img{width:100%;height:100%;object-fit:cover}.modal-info{padding:20px 10px}.modal-info small{color:var(--gold);font-weight:900}.modal-info h2{font-family:"Cormorant Garamond",serif;font-size:42px;line-height:1.02;margin:5px 0 12px}.modal-info p{color:var(--muted);font-size:13px}.detail{margin:18px 0;border-top:1px solid var(--line)}.detail div{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}.detail strong{color:#6e6154}.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}
+/* Modal Form Styling */
+.form-group{margin-bottom:14px;text-align:left}.form-group label{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--dark)}.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-card{max-width:560px;margin:auto}.grid{grid-template-columns:repeat(2,1fr)}.feature-grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.menu{display:block}.modal-grid{grid-template-columns:1fr}.modal-img{height:400px}}
 @media(max-width:560px){.hero{padding:65px 0}.hero h1{font-size:54px}.grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}.product-img{height:390px}.section-head h2{font-size:40px}.toolbar{align-items:stretch}.filters{width:100%}.filter{flex:1}.actions{grid-template-columns:1fr}.cta-box{padding:35px 20px}.cta-box h2{font-size:38px}.footer-grid{grid-template-columns:1fr}.modal-img{height:360px}}
 </style>
 </head>
 <body>
-<header><div class="container nav"><a href="#home" class="brand"><img src="LOGO%20ARANSHA.jpg" alt="ARANSHA MEDIA" onerror="this.style.display='none'"><div><strong>ARANSHA MEDIA</strong><span>PERCETAKAN & DIGITAL PRINTING</span></div></a><nav class="navlinks"><a href="#home">Beranda</a><a href="#produk">Katalog</a><a href="#keunggulan">Keunggulan</a><a href="#kontak">Kontak</a></nav><button class="menu" onclick="document.querySelector('.navlinks').style.display=document.querySelector('.navlinks').style.display==='flex'?'none':'flex'">☰</button></div></header>
+<header>
+  <div class="container nav">
+    <a href="#home" class="brand">
+      <img src="LOGO%20ARANSHA.jpg" alt="ARANSHA MEDIA" onerror="this.style.display='none'">
+      <div><strong>ARANSHA MEDIA</strong><span>PERCETAKAN & DIGITAL PRINTING</span></div>
+    </a>
+    <nav class="navlinks">
+      <a href="#home">Beranda</a>
+      <a href="#produk">Katalog</a>
+      <a href="#keunggulan">Keunggulan</a>
+      <a href="#kontak">Kontak</a>
+      <button id="adminLoginBtn" class="btn btn-gold" style="padding:6px 14px; font-size:12px;" onclick="openLoginModal()">Login Admin</button>
+      <button id="adminAddBtn" class="btn btn-gold" style="padding:6px 14px; font-size:12px; display:none;" onclick="openEditModal(null)">+ Tambah Produk</button>
+      <button id="adminLogoutBtn" class="btn btn-dark" style="padding:6px 14px; font-size:12px; display:none;" onclick="logoutAdmin()">Logout</button>
+    </nav>
+    <button class="menu" onclick="document.querySelector('.navlinks').style.display=document.querySelector('.navlinks').style.display==='flex'?'none':'flex'">☰</button>
+  </div>
+</header>
+
 <main>
-<section class="hero" id="home"><div class="container hero-grid"><div><span class="eyebrow">✦ KATALOG CETAK PREMIUM</span><h1>Setiap Momen,<br>Punya <em>Cerita.</em></h1><p>Temukan koleksi Undangan Pernikahan, Buku Yasin, Khitanan, Aqiqah, dan Ulang Tahun dari ARANSHA MEDIA. Pilih berdasarkan kode katalog, lihat detail ukuran dan bahan, lalu langsung konsultasi melalui WhatsApp.</p><div class="btns"><a class="btn btn-gold" href="#produk">Lihat Katalog</a><a class="btn btn-dark" target="_blank" href="https://wa.me/6281227267303?text=Halo%20ARANSHA%20MEDIA,%20saya%20ingin%20konsultasi%20katalog%20produk.">WhatsApp Kami</a></div></div><div class="hero-card"><div class="hero-photo" id="heroPhoto"><div class="hero-placeholder">Katalog<br>Premium</div></div></div></div></section>
-<section id="produk"><div class="container"><div class="section-head"><div class="kicker">KOLEKSI ARANSHA MEDIA</div><h2>Katalog Produk</h2><p>Pilih kategori untuk memfilter pencarian berdasarkan kebutuhan acara Anda.</p></div><div class="toolbar"><div class="search"><input id="search" type="search" placeholder="Cari kode, nama, ukuran, atau bahan..." oninput="render()"></div><div class="filters" id="filters"></div></div><div class="grid" id="productGrid"></div></div></section>
-<section class="features" id="keunggulan"><div class="container"><div class="section-head"><div class="kicker">KENAPA ARANSHA MEDIA</div><h2 style="color:#fff">Dibuat untuk Memudahkan</h2><p style="color:#cfc3b3">Dari memilih desain sampai menghubungi kami.</p></div><div class="feature-grid"><div class="feature"><b>✦ Kategori Terstruktur</b><p>Undangan Pernikahan, Buku Yasin, Khitanan, Aqiqah, dan Ulang Tahun terpisah dengan jelas.</p></div><div class="feature"><b>✦ Detail Produk Lengkap</b><p>Setiap produk menampilkan ukuran, jenis bahan, dan estimasi harga.</p></div><div class="feature"><b>✦ WhatsApp Cepat</b><p>Kode dan nama kategori otomatis terkirim saat Anda berkonsultasi.</p></div><div class="feature"><b>✦ Tampilan Responsif</b><p>Sangat nyaman diakses melalui ponsel, tablet, maupun komputer.</p></div></div></div></section>
-<section class="cta" id="kontak"><div class="container"><div class="cta-box"><div class="kicker">KONSULTASI</div><h2>Sudah menemukan desain yang Anda suka?</h2><p>Kirim kode katalog kepada ARANSHA MEDIA. Kami siap membantu pemilihan bahan, ukuran, jumlah pesanan, dan penyesuaian desain.</p><a class="btn btn-gold" target="_blank" href="https://wa.me/6281227267303?text=Halo%20ARANSHA%20MEDIA,%20saya%20ingin%20konsultasi%20produk%20cetak.">💬 Chat WhatsApp</a></div></div></section>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">✦ KATALOG CETAK PREMIUM</span>
+      <h1>Setiap Momen,<br>Punya <em>Cerita.</em></h1>
+      <p>Temukan koleksi Undangan Pernikahan, Buku Yasin, Khitanan, Aqiqah, dan Ulang Tahun dari ARANSHA MEDIA. Pilih berdasarkan kode katalog, lihat detail ukuran dan bahan, lalu langsung konsultasi melalui WhatsApp.</p>
+      <div class="btns">
+        <a class="btn btn-gold" href="#produk">Lihat Katalog</a>
+        <a class="btn btn-dark" target="_blank" href="https://wa.me/6281227267303?text=Halo%20ARANSHA%20MEDIA,%20saya%20ingin%20konsultasi%20katalog%20produk.">WhatsApp Kami</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-photo" id="heroPhoto">
+        <div class="hero-placeholder">Katalog<br>Premium</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="produk">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">KOLEKSI ARANSHA MEDIA</div>
+      <h2>Katalog Produk</h2>
+      <p>Pilih kategori untuk memfilter pencarian berdasarkan kebutuhan acara Anda.</p>
+    </div>
+    <div class="toolbar">
+      <div class="search">
+        <input id="search" type="search" placeholder="Cari kode, nama, ukuran, atau bahan..." oninput="render()">
+      </div>
+      <div class="filters" id="filters"></div>
+    </div>
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+<section class="features" id="keunggulan">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">KENAPA ARANSHA MEDIA</div>
+      <h2 style="color:#fff">Dibuat untuk Memudahkan</h2>
+      <p style="color:#cfc3b3">Dari memilih desain sampai menghubungi kami.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature"><b>✦ Kategori Terstruktur</b><p>Undangan Pernikahan, Buku Yasin, Khitanan, Aqiqah, dan Ulang Tahun terpisah dengan jelas.</p></div>
+      <div class="feature"><b>✦ Detail Produk Lengkap</b><p>Setiap produk menampilkan ukuran, jenis bahan, dan estimasi harga.</p></div>
+      <div class="feature"><b>✦ WhatsApp Cepat</b><p>Kode dan nama kategori otomatis terkirim saat Anda berkonsultasi.</p></div>
+      <div class="feature"><b>✦ Tampilan Responsif</b><p>Sangat nyaman diakses melalui ponsel, tablet, maupun komputer.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="kontak">
+  <div class="container">
+    <div class="cta-box">
+      <div class="kicker">KONSULTASI</div>
+      <h2>Sudah menemukan desain yang Anda suka?</h2>
+      <p>Kirim kode katalog kepada ARANSHA MEDIA. Kami siap membantu pemilihan bahan, ukuran, jumlah pesanan, dan penyesuaian desain.</p>
+      <a class="btn btn-gold" target="_blank" href="https://wa.me/6281227267303?text=Halo%20ARANSHA%20MEDIA,%20saya%20ingin%20konsultasi%20produk%20cetak.">💬 Chat WhatsApp</a>
+    </div>
+  </div>
+</section>
 </main>
-<footer><div class="container"><div class="footer-grid"><div><h3>ARANSHA MEDIA</h3><p>Percetakan & Digital Printing — penyedia jasa cetak undangan pernikahan, buku yasin, undangan khitanan, aqiqah, ulang tahun, dan produk percetakan lainnya.</p></div><div><h3>Kategori Produk</h3><ul><li>WD — UNDANGAN PERNIKAHAN</li><li>YS — BUKU YASIN</li><li>KH — UNDANGAN KHITANAN</li><li>AQ — UNDANGAN AQIQAH</li><li>UT — UNDANGAN ULANG TAHUN</li></ul></div><div><h3>Hubungi Kami</h3><p>WhatsApp: 0812-2726-7303</p><p>Email: aranshamedia@gmail.com</p><p>Alamat: Kp. Sidodadi, RT.08 / RW.02, Kel. Sapuran, Kec. Sapuran, Kab. Wonosobo</p><p>Sebutkan kode katalog saat melakukan pemesanan.</p></div></div><div class="copyright">© <span id="year"></span> ARANSHA MEDIA. All rights reserved.</div></div></footer>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>ARANSHA MEDIA</h3>
+        <p>Percetakan & Digital Printing — penyedia jasa cetak undangan pernikahan, buku yasin, undangan khitanan, aqiqah, ulang tahun, dan produk percetakan lainnya.</p>
+      </div>
+      <div>
+        <h3>Kategori Produk</h3>
+        <ul>
+          <li>WD — UNDANGAN PERNIKAHAN</li>
+          <li>YS — BUKU YASIN</li>
+          <li>KH — UNDANGAN KHITANAN</li>
+          <li>AQ — UNDANGAN AQIQAH</li>
+          <li>UT — UNDANGAN ULANG TAHUN</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Hubungi Kami</h3>
+        <p>WhatsApp: 0812-2726-7303</p>
+        <p>Email: aranshamedia@gmail.com</p>
+        <p>Alamat: Kp. Sidodadi, RT.08 / RW.02, Kel. Sapuran, Kec. Sapuran, Kab. Wonosobo</p>
+        <p>Sebutkan kode katalog saat melakukan pemesanan.</p>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> ARANSHA MEDIA. All rights reserved.</div>
+  </div>
+</footer>
+
 <a class="wa" target="_blank" href="https://wa.me/6281227267303?text=Halo%20ARANSHA%20MEDIA,%20saya%20ingin%20melihat%20katalog%20produk.">◉</a>
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="modal-box"><button class="close" onclick="closeModal()">×</button><div class="modal-grid"><div class="modal-img"><img id="mImg" alt=""></div><div class="modal-info"><small id="mGroup"></small><h2 id="mTitle"></h2><p id="mDesc"></p><div class="detail"><div><strong>Kode</strong><span id="mCode"></span></div><div><strong>Ukuran</strong><span id="mSize"></span></div><div><strong>Bahan</strong><span id="mPaper"></span></div><div><strong>Harga</strong><span id="mPrice"></span></div></div><a id="mWa" class="btn btn-gold" target="_blank" style="width:100%">💬 Pesan / Tanya Produk</a></div></div></div></div>
+
+<!-- MODAL DETAIL PRODUK -->
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="modal-grid">
+      <div class="modal-img"><img id="mImg" alt=""></div>
+      <div class="modal-info">
+        <small id="mGroup"></small>
+        <h2 id="mTitle"></h2>
+        <p id="mDesc"></p>
+        <div class="detail">
+          <div><strong>Kode</strong><span id="mCode"></span></div>
+          <div><strong>Ukuran</strong><span id="mSize"></span></div>
+          <div><strong>Bahan</strong><span id="mPaper"></span></div>
+          <div><strong>Harga</strong><span id="mPrice"></span></div>
+        </div>
+        <a id="mWa" class="btn btn-gold" target="_blank" style="width:100%">💬 Pesan / Tanya Produk</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL LOGIN ADMIN -->
+<div class="modal" id="loginModal" onclick="if(event.target===this)closeLoginModal()">
+  <div class="modal-box" style="max-width:400px; text-align:center;">
+    <button class="close" onclick="closeLoginModal()">×</button>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:32px; margin-bottom:15px;">Login Admin</h2>
+    <div class="form-group">
+      <label>Password Admin</label>
+      <input type="password" id="adminPassInput" placeholder="Masukkan password (default: admin123)">
+    </div>
+    <button class="btn btn-gold" style="width:100%; margin-top:10px;" onclick="loginAdmin()">Login</button>
+  </div>
+</div>
+
+<!-- MODAL EDIT / TAMBAH PRODUK ADMIN -->
+<div class="modal" id="editModal" onclick="if(event.target===this)closeEditModal()">
+  <div class="modal-box" style="max-width:500px;">
+    <button class="close" onclick="closeEditModal()">×</button>
+    <h2 id="editModalTitle" style="font-family:'Cormorant Garamond',serif; font-size:32px; margin-bottom:15px;">Edit Produk</h2>
+    <form id="editForm" onsubmit="saveProduct(event)">
+      <input type="hidden" id="editOriginalCode">
+      <div class="form-group">
+        <label>Kode Produk</label>
+        <input type="text" id="editCode" required placeholder="Contoh: WD-001">
+      </div>
+      <div class="form-group">
+        <label>Kategori</label>
+        <select id="editGroup" required>
+          <option value="WD">WD - UNDANGAN PERNIKAHAN</option>
+          <option value="YS">YS - BUKU YASIN</option>
+          <option value="KH">KH - UNDANGAN KHITANAN</option>
+          <option value="AQ">AQ - UNDANGAN AQIQAH</option>
+          <option value="UT">UT - UNDANGAN ULANG TAHUN</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Nama Produk</label>
+        <input type="text" id="editTitle" required placeholder="Contoh: Undangan Jawa Premium">
+      </div>
+      <div class="form-group">
+        <label>Ukuran</label>
+        <input type="text" id="editSize" required placeholder="Contoh: 11,8 × 15,7 cm">
+      </div>
+      <div class="form-group">
+        <label>Jenis Bahan / Kertas</label>
+        <select id="editPaperSelect" onchange="checkCustomPaper(this)" required>
+          <option value="Art Carton">Art Carton</option>
+          <option value="Ivory">Ivory</option>
+          <option value="Jasmine">Jasmine</option>
+          <option value="HVS">HVS</option>
+          <option value="Art Paper">Art Paper</option>
+          <option value="BC / Brief Card (TIK)">BC / Brief Card (TIK)</option>
+          <option value="Cover Bludru / Hardcover">Cover Bludru / Hardcover</option>
+          <option value="Sesuai pilihan">Sesuai pilihan</option>
+          <option value="Lainnya">Lainnya (Ketik Manual)...</option>
+        </select>
+        <input type="text" id="editPaperCustom" style="display:none; margin-top:8px;" placeholder="Masukkan jenis bahan manual...">
+      </div>
+      <div class="form-group">
+        <label>Harga / Estimasi</label>
+        <input type="text" id="editPrice" required placeholder="Contoh: Hubungi Kami / Rp 2.000">
+      </div>
+      <div class="form-group">
+        <label>Deskripsi Singkat</label>
+        <textarea id="editDesc" rows="3" required placeholder="Deskripsi ringkas produk..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-gold" style="width:100%; margin-top:10px;">Simpan Perubahan</button>
+    </form>
+  </div>
+</div>
+
 <script>
 const REPO='hadigitalprinting15-spec/UNDANGAN';
 const FOLDER='GAMBAR/katalog undangan';
 const RAW_BASE='https://raw.githubusercontent.com/hadigitalprinting15-spec/UNDANGAN/main/';
 const WA='6281227267303';
+const ADMIN_PASS = 'admin123'; // Password Login Admin Default
 
-// Pemetaan Kode Kategori ke Nama Kategori Resmi
 const CATEGORIES = {
   'WD': 'UNDANGAN PERNIKAHAN',
   'YS': 'BUKU YASIN',
@@ -51,40 +250,25 @@ const CATEGORIES = {
   'UT': 'UNDANGAN ULANG TAHUN'
 };
 
-const products = [
-  // ==========================================
-  // 1. UNDANGAN PERNIKAHAN (WD)
-  // ==========================================
+const defaultProducts = [
   { code: 'WD-001', group: 'WD', title: 'Undangan Jawa Premium', size: '11,8 × 15,7 cm', paper: 'Ivory', price: 'Hubungi Kami', desc: 'Undangan pernikahan nuansa Jawa yang elegan dan berkelas.' },
   { code: 'WD-002', group: 'WD', title: 'Undangan Wayang Elegan', size: '10 × 15,7 cm', paper: 'Ivory', price: 'Hubungi Kami', desc: 'Konsep wayang klasik dengan sentuhan mewah.' },
   { code: 'WD-003', group: 'WD', title: 'Wedding Classic', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Desain pernikahan klasik yang dapat disesuaikan.' },
   { code: 'WD-004', group: 'WD', title: 'Wedding Modern', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Gaya modern minimalis kekinian.' },
   { code: 'WD-005', group: 'WD', title: 'Wedding Luxury', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Tampilan mewah nan elegan untuk pesta pernikahan.' },
-
-  // ==========================================
-  // 2. BUKU YASIN (YS)
-  // ==========================================
   { code: 'YS-001', group: 'YS', title: 'Buku Yasin Softcover', size: 'Custom', paper: 'Art Paper / HVS', price: 'Hubungi Kami', desc: 'Buku Yasin softcover dengan cetakan rapi dan pilihan isi lengkap.' },
-  { code: 'YS-002', group: 'YS', title: 'Buku Yasin Softcove', size: 'Custom', paper: 'Art Carton / RCP', price: 'Hubungi Kami', desc: 'Buku Yasin Softcove elegan dengan pilihan cetak foil emas/perak.' },
-  { code: 'YS-003', group: 'YS', title: 'Buku Yasin Softcove Premium', size: 'Custom', paper: 'Cover Bludru / Hardcover', price: 'Hubungi Kami', desc: 'Buku Yasin Softcove eksklusif dan tahan lama.' },
-
-  // ==========================================
-  // 3. UNDANGAN KHITANAN (KH)
-  // ==========================================
+  { code: 'YS-002', group: 'YS', title: 'Buku Yasin Softcover Elegan', size: 'Custom', paper: 'Art Carton / RCP', price: 'Hubungi Kami', desc: 'Buku Yasin softcover elegan dengan pilihan cetak foil emas/perak.' },
+  { code: 'YS-003', group: 'YS', title: 'Buku Yasin Premium Bludru', size: 'Custom', paper: 'Cover Bludru / Hardcover', price: 'Hubungi Kami', desc: 'Buku Yasin eksklusif dan tahan lama.' },
   { code: 'KH-001', group: 'KH', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Undangan acara syukuran khitanan putra Anda.' },
-
-  // ==========================================
-  // 4. UNDANGAN AQIQAH (AQ)
-  // ==========================================
   { code: 'AQ-001', group: 'AQ', title: 'Undangan Aqiqah Lucu', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Undangan syukuran aqiqah untuk buah hati tercinta.' },
-
-  // ==========================================
-  // 5. UNDANGAN ULANG TAHUN (UT)
-  // ==========================================
   { code: 'UT-001', group: 'UT', title: 'Undangan Ulang Tahun Ceria', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Undangan ulang tahun dengan tema penuh warna.' }
 ];
 
-let files=[];let active='Semua';
+// Inisialisasi Produk dari LocalStorage jika ada
+let products = JSON.parse(localStorage.getItem('aransha_products')) || defaultProducts;
+let isAdmin = localStorage.getItem('aransha_is_admin') === 'true';
+
+let files=[]; let active='Semua';
 function norm(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'')}
 function fallback(code){return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000"><rect width="100%" height="100%" fill="#eee6db"/><text x="50%" y="48%" text-anchor="middle" font-family="Georgia" font-size="72" fill="#9b7841">${code}</text><text x="50%" y="55%" text-anchor="middle" font-family="Arial" font-size="24" fill="#74685c">ARANSHA MEDIA</text></svg>`)}
 function findImage(code){const n=norm(code);const f=files.find(x=>norm(x.name).includes(n));return f?f.download_url:(RAW_BASE+encodeURIComponent(FOLDER).replace(/%2F/g,'/')+'/'+encodeURIComponent(code)+'.jpg')}
@@ -92,6 +276,18 @@ function findImage(code){const n=norm(code);const f=files.find(x=>norm(x.name).i
 function wa(code,title,group){
   const catName = CATEGORIES[group] || group;
   return 'https://wa.me/'+WA+'?text='+encodeURIComponent('Halo ARANSHA MEDIA, saya berminat dengan katalog '+catName+' ['+code+'] — '+title+'. Mohon informasi detail ukuran, bahan, dan harganya.');
+}
+
+function updateAdminUI(){
+  if(isAdmin){
+    document.getElementById('adminLoginBtn').style.display = 'none';
+    document.getElementById('adminAddBtn').style.display = 'inline-flex';
+    document.getElementById('adminLogoutBtn').style.display = 'inline-flex';
+  } else {
+    document.getElementById('adminLoginBtn').style.display = 'inline-flex';
+    document.getElementById('adminAddBtn').style.display = 'none';
+    document.getElementById('adminLogoutBtn').style.display = 'none';
+  }
 }
 
 function render(){
@@ -129,6 +325,10 @@ function render(){
           <button class="btn btn-dark" onclick="detail('${p.code}')">Detail</button>
           <a class="btn btn-gold" target="_blank" href="${wa(p.code,p.title,p.group)}">WhatsApp</a>
         </div>
+        ${isAdmin ? `<div class="admin-actions">
+          <button class="btn btn-gold" onclick="openEditModal('${p.code}')">✏️ Edit</button>
+          <button class="btn btn-danger" onclick="deleteProduct('${p.code}')">🗑️ Hapus</button>
+        </div>` : ''}
       </div>
     </article>`;
   }).join('');
@@ -171,6 +371,135 @@ function closeModal(){
   document.body.style.overflow='';
 }
 
+/* --- FITUR ADMIN --- */
+function openLoginModal(){
+  document.getElementById('loginModal').classList.add('show');
+}
+function closeLoginModal(){
+  document.getElementById('loginModal').classList.remove('show');
+  document.getElementById('adminPassInput').value = '';
+}
+function loginAdmin(){
+  const pass = document.getElementById('adminPassInput').value;
+  if(pass === ADMIN_PASS){
+    isAdmin = true;
+    localStorage.setItem('aransha_is_admin', 'true');
+    updateAdminUI();
+    render();
+    closeLoginModal();
+    alert('Berhasil Login sebagai Admin!');
+  } else {
+    alert('Password Admin Salah!');
+  }
+}
+function logoutAdmin(){
+  isAdmin = false;
+  localStorage.setItem('aransha_is_admin', 'false');
+  updateAdminUI();
+  render();
+  alert('Anda telah Logout.');
+}
+
+function openEditModal(code){
+  const isEdit = !!code;
+  document.getElementById('editModalTitle').textContent = isEdit ? 'Edit Produk' : 'Tambah Produk Baru';
+  document.getElementById('editOriginalCode').value = isEdit ? code : '';
+  
+  if(isEdit){
+    const p = products.find(x=>x.code===code);
+    if(!p) return;
+    document.getElementById('editCode').value = p.code;
+    document.getElementById('editGroup').value = p.group;
+    document.getElementById('editTitle').value = p.title;
+    document.getElementById('editSize').value = p.size;
+    
+    // Set Pilihan Paper
+    const selectPaper = document.getElementById('editPaperSelect');
+    const customInput = document.getElementById('editPaperCustom');
+    let foundOption = Array.from(selectPaper.options).some(opt => opt.value === p.paper);
+    if(foundOption){
+      selectPaper.value = p.paper;
+      customInput.style.display = 'none';
+      customInput.value = '';
+    } else {
+      selectPaper.value = 'Lainnya';
+      customInput.style.display = 'block';
+      customInput.value = p.paper;
+    }
+    
+    document.getElementById('editPrice').value = p.price;
+    document.getElementById('editDesc').value = p.desc;
+  } else {
+    document.getElementById('editForm').reset();
+    document.getElementById('editPaperCustom').style.display = 'none';
+  }
+  
+  document.getElementById('editModal').classList.add('show');
+}
+
+function closeEditModal(){
+  document.getElementById('editModal').classList.remove('show');
+}
+
+function checkCustomPaper(select){
+  const customInput = document.getElementById('editPaperCustom');
+  if(select.value === 'Lainnya'){
+    customInput.style.display = 'block';
+    customInput.required = true;
+  } else {
+    customInput.style.display = 'none';
+    customInput.required = false;
+  }
+}
+
+function saveProduct(e){
+  e.preventDefault();
+  const originalCode = document.getElementById('editOriginalCode').value;
+  const code = document.getElementById('editCode').value.trim();
+  const group = document.getElementById('editGroup').value;
+  const title = document.getElementById('editTitle').value.trim();
+  const size = document.getElementById('editSize').value.trim();
+  
+  const paperSelect = document.getElementById('editPaperSelect').value;
+  const paperCustom = document.getElementById('editPaperCustom').value.trim();
+  const paper = (paperSelect === 'Lainnya') ? paperCustom : paperSelect;
+  
+  const price = document.getElementById('editPrice').value.trim();
+  const desc = document.getElementById('editDesc').value.trim();
+  
+  const newProductData = { code, group, title, size, paper, price, desc };
+  
+  if(originalCode){
+    // Edit Mode
+    const index = products.findIndex(x=>x.code===originalCode);
+    if(index !== -1){
+      products[index] = newProductData;
+    }
+  } else {
+    // Tambah Baru Mode
+    if(products.some(x=>x.code===code)){
+      alert('Kode produk sudah ada, silakan gunakan kode lain!');
+      return;
+    }
+    products.unshift(newProductData);
+  }
+  
+  localStorage.setItem('aransha_products', JSON.stringify(products));
+  buildFilters();
+  render();
+  closeEditModal();
+  alert('Data produk berhasil disimpan!');
+}
+
+function deleteProduct(code){
+  if(confirm('Apakah Anda yakin ingin menghapus produk '+code+'?')){
+    products = products.filter(x=>x.code!==code);
+    localStorage.setItem('aransha_products', JSON.stringify(products));
+    buildFilters();
+    render();
+  }
+}
+
 async function loadFiles(){
   try{
     const url='https://api.github.com/repos/'+REPO+'/contents/'+encodeURIComponent(FOLDER).replace(/%2F/g,'/')+'?ref=main';
@@ -194,10 +523,11 @@ function setHero(){
 }
 
 document.getElementById('year').textContent=new Date().getFullYear();
+updateAdminUI();
 buildFilters();
 render();
 loadFiles();
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeLoginModal();closeEditModal();}});
 </script>
 </body>
 </html>
