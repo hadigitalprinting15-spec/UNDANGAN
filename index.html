@@ -51,18 +51,37 @@ const CATEGORIES = {
   'UT': 'UNDANGAN ULANG TAHUN'
 };
 
-const products=[
- {code:'WD-001',group:'WD',title:'Undangan Jawa Premium',size:'11,8 × 15,7 cm',paper:'Ivory',price:'Hubungi Kami',desc:'Undangan pernikahan nuansa Jawa yang elegan dan berkelas.'},
- {code:'WD-002',group:'WD',title:'Undangan Wayang Elegan',size:'10 × 15,7 cm',paper:'Ivory',price:'Hubungi Kami',desc:'Konsep wayang klasik dengan sentuhan mewah.'},
- {code:'WD-003',group:'WD',title:'Wedding Classic',size:'Custom',paper:'Sesuai pilihan',price:'Hubungi Kami',desc:'Desain pernikahan klasik yang dapat disesuaikan.'},
- {code:'WD-004',group:'WD',title:'Wedding Modern',size:'Custom',paper:'Sesuai pilihan',price:'Hubungi Kami',desc:'Gaya modern minimalis kekinian.'},
- {code:'WD-005',group:'WD',title:'Wedding Luxury',size:'Custom',paper:'Sesuai pilihan',price:'Hubungi Kami',desc:'Tampilan mewah nan elegan untuk pesta pernikahan.'},
- {code:'YS-001',group:'YS',title:'Buku Yasin Standard',size:'Custom',paper:'HVS / Art Paper',price:'Hubungi Kami',desc:'Buku Yasin cetak rapi dengan pilihan isi komplit.'},
- {code:'YS-002',group:'YS',title:'Buku Yasin Softcover',size:'Custom',paper:'Art Carton',price:'Hubungi Kami',desc:'Buku Yasin softcover dengan foil emas/perak.'},
- {code:'YS-003',group:'YS',title:'Buku Yasin Hardcover',size:'Custom',paper:'Hardcover / RCP / Bludru',price:'Hubungi Kami',desc:'Buku Yasin hardcover mewah dan tahan lama.'},
- {code:'KH-001',group:'KH',title:'Undangan Khitanan Elegan',size:'Custom',paper:'Sesuai pilihan',price:'Hubungi Kami',desc:'Undangan acara syukuran khitanan putra Anda.'},
- {code:'AQ-001',group:'AQ',title:'Undangan Aqiqah Lucu',size:'Custom',paper:'Sesuai pilihan',price:'Hubungi Kami',desc:'Undangan syukuran aqiqah buah hati tercinta.'},
- {code:'UT-001',group:'UT',title:'Undangan Ulang Tahun Ceria',size:'Custom',paper:'Sesuai pilihan',price:'Hubungi Kami',desc:'Undangan ulang tahun anak dengan tema penuh warna.'}
+const products = [
+  // ==========================================
+  // 1. UNDANGAN PERNIKAHAN (WD)
+  // ==========================================
+  { code: 'WD-001', group: 'WD', title: 'Undangan Jawa Premium', size: '11,8 × 15,7 cm', paper: 'Ivory', price: 'Hubungi Kami', desc: 'Undangan pernikahan nuansa Jawa yang elegan dan berkelas.' },
+  { code: 'WD-002', group: 'WD', title: 'Undangan Wayang Elegan', size: '10 × 15,7 cm', paper: 'Ivory', price: 'Hubungi Kami', desc: 'Konsep wayang klasik dengan sentuhan mewah.' },
+  { code: 'WD-003', group: 'WD', title: 'Wedding Classic', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Desain pernikahan klasik yang dapat disesuaikan.' },
+  { code: 'WD-004', group: 'WD', title: 'Wedding Modern', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Gaya modern minimalis kekinian.' },
+  { code: 'WD-005', group: 'WD', title: 'Wedding Luxury', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Tampilan mewah nan elegan untuk pesta pernikahan.' },
+
+  // ==========================================
+  // 2. BUKU YASIN (YS)
+  // ==========================================
+  { code: 'YS-001', group: 'YS', title: 'Buku Yasin Softcover', size: 'Custom', paper: 'Art Paper / HVS', price: 'Hubungi Kami', desc: 'Buku Yasin softcover dengan cetakan rapi dan pilihan isi lengkap.' },
+  { code: 'YS-002', group: 'YS', title: 'Buku Yasin Hardcover', size: 'Custom', paper: 'Art Carton / RCP', price: 'Hubungi Kami', desc: 'Buku Yasin hardcover elegan dengan pilihan cetak foil emas/perak.' },
+  { code: 'YS-003', group: 'YS', title: 'Buku Yasin Bludru Premium', size: 'Custom', paper: 'Cover Bludru / Hardcover', price: 'Hubungi Kami', desc: 'Buku Yasin bludru eksklusif dan tahan lama.' },
+
+  // ==========================================
+  // 3. UNDANGAN KHITANAN (KH)
+  // ==========================================
+  { code: 'KH-001', group: 'KH', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Undangan acara syukuran khitanan putra Anda.' },
+
+  // ==========================================
+  // 4. UNDANGAN AQIQAH (AQ)
+  // ==========================================
+  { code: 'AQ-001', group: 'AQ', title: 'Undangan Aqiqah Lucu', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Undangan syukuran aqiqah untuk buah hati tercinta.' },
+
+  // ==========================================
+  // 5. UNDANGAN ULANG TAHUN (UT)
+  // ==========================================
+  { code: 'UT-001', group: 'UT', title: 'Undangan Ulang Tahun Ceria', size: 'Custom', paper: 'Sesuai pilihan', price: 'Hubungi Kami', desc: 'Undangan ulang tahun dengan tema penuh warna.' }
 ];
 
 let files=[];let active='Semua';
