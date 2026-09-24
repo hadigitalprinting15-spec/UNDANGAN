@@ -35,23 +35,21 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
 </head>
 <body>
 <header>
-  <div class="container nav">
-    <a href="#home" class="brand">
-      <img src="LOGO%20ARANSHA.jpg" alt="ARANSHA MEDIA" onerror="this.style.display='none'">
-      <div><strong>ARANSHA MEDIA</strong><span>PERCETAKAN & DIGITAL PRINTING</span></div>
-    </a>
-    <div class="nav-right">
-      <nav class="navlinks">
-        <a href="#home">Beranda</a>
-        <a href="#produk">Katalog</a>
-        <a href="#keunggulan">Keunggulan</a>
-        <a href="#kontak">Kontak</a>
-        <button id="adminLoginBtn" class="btn-admin-login" onclick="openLoginModal()">Login Admin</button>
-        <button id="adminAddBtn" class="btn-admin-login" style="display:none;" onclick="openEditModal(null)">+ Tambah Produk</button>
-        <button id="adminLogoutBtn" class="btn btn-dark" style="padding:6px 12px; font-size:11px; display:none;" onclick="logoutAdmin()">Logout</button>
-      </nav>
-      <button class="menu" onclick="document.querySelector('.navlinks').style.display=document.querySelector('.navlinks').style.display==='flex'?'none':'flex'">☰</button>
-    </div>
+ <div class="nav-right">
+  <nav class="navlinks">
+    <a href="#home">Beranda</a>
+    <a href="#produk">Katalog</a>
+    <a href="#keunggulan">Keunggulan</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+
+  <!-- Pindahkan tombol ke luar navlinks -->
+  <button id="adminLoginBtn" class="btn-admin-login" onclick="openLoginModal()">Login Admin</button>
+  <button id="adminAddBtn" class="btn-admin-login" style="display:none;" onclick="openEditModal(null)">+ Tambah Produk</button>
+  <button id="adminLogoutBtn" class="btn btn-dark" style="padding:6px 12px; font-size:11px; display:none;" onclick="logoutAdmin()">Logout</button>
+
+  <button class="menu" onclick="document.querySelector('.navlinks').style.display=document.querySelector('.navlinks').style.display==='flex'?'none':'flex'">☰</button>
+</div>
   </div>
 </header>
 
