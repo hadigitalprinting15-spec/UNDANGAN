@@ -122,7 +122,7 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
     <div class="feature-grid">
       <div class="feature"><b>✦ Kategori Terstruktur</b><p>Undangan Pernikahan, Buku Yasin, dan Khitanan terpisah dengan jelas.</p></div>
       <div class="feature"><b>✦ Hitung Otomatis Grosir</b><p>Semakin banyak pesanan (mulai 100 pcs ke atas), harga per lembar akan semakin murah.</p></div>
-      <div class="feature"><b>✦ Detail & Opsi Finishing</b><p>Dapat menentukan opsi laminasi, sisi cetak, dan lipatan sesuai selera.</p></div>
+      <div class="feature"><b>✦ Detail & Pilihan Bahan</b><p>Dapat menentukan opsi bahan Ivory/Art Carton 230 gsm atau 260 gsm.</p></div>
       <div class="feature"><b>✦ Tampilan Responsif</b><p>Sangat nyaman diakses melalui ponsel, tablet, maupun komputer.</p></div>
     </div>
   </div>
@@ -187,12 +187,12 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
         <div class="detail">
           <div><strong>Kode</strong><span id="mCode"></span></div>
           <div><strong>Ukuran</strong><span id="mSize"></span></div>
-          <div><strong>Bahan Utama</strong><span id="mPaper"></span></div>
+          <div><strong>Bahan Dasar Katalog</strong><span id="mPaper"></span></div>
         </div>
 
-        <!-- KALKULATOR JUMLAH & HARGA OTOMATIS -->
+        <!-- KALKULATOR JUMLAH & PILIHAN BAHAN -->
         <div class="calc-box">
-          <h4>🧮 Kalkulator Pesanan & Opsi Finishing</h4>
+          <h4>🧮 Kalkulator Pesanan & Pilihan Bahan</h4>
           <div class="calc-grid">
             <div class="calc-field">
               <label for="orderQty">Jumlah Pesanan (Pcs):</label>
@@ -205,21 +205,20 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
                 <option value="1">1 Sisi</option>
               </select>
             </div>
-            <div class="calc-field">
+            <div class="calc-field" style="grid-column: span 2;">
+              <label for="orderMaterial">Pilihan Bahan Utama:</label>
+              <select id="orderMaterial" onchange="calculatePrice()">
+                <option value="Ivory/Art Carton 230 gsm">Ivory / Art Carton 230 gsm (Standar)</option>
+                <option value="Ivory/Art Carton 260 gsm">Ivory / Art Carton 260 gsm (+Rp 200)</option>
+              </select>
+            </div>
+            <div class="calc-field" style="grid-column: span 2;">
               <label for="orderLamination">Finishing Laminasi:</label>
               <select id="orderLamination" onchange="calculatePrice()">
                 <option value="Tanpa Laminasi">Tanpa Laminasi</option>
                 <option value="Laminasi Doff">Laminasi Doff (+Rp 300)</option>
                 <option value="Laminasi Glossy">Laminasi Glossy (+Rp 300)</option>
                 <option value="Foil Emas/Perak">Foil Emas/Perak (+Rp 600)</option>
-              </select>
-            </div>
-            <div class="calc-field">
-              <label for="orderFinishing">Potong & Lipat:</label>
-              <select id="orderFinishing" onchange="calculatePrice()">
-                <option value="Potong Rapi & Lipat">Potong Rapi & Lipat</option>
-                <option value="Tanpa Lipat">Tanpa Lipat</option>
-                <option value="Pond Custom Shape">Pond Custom Shape (+Rp 200)</option>
               </select>
             </div>
           </div>
@@ -307,8 +306,8 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
       <div class="form-group">
         <label for="editPaperSelect">Jenis Bahan / Kertas</label>
         <select id="editPaperSelect" onchange="checkCustomPaper(this)" required>
-          <option value="Art Carton">Art Carton</option>
           <option value="Ivory">Ivory</option>
+          <option value="Art Carton">Art Carton</option>
           <option value="Jasmine">Jasmine</option>
           <option value="HVS">HVS</option>
           <option value="Art Paper">Art Paper</option>
@@ -365,7 +364,7 @@ const defaultProducts = [
   { code: 'KH-001', group: 'KH', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 1800, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan acara syukuran khitanan putra Anda.', images: [] }
 ];
 
-let products = JSON.parse(localStorage.getItem('aransha_products_v4')) || defaultProducts;
+let products = JSON.parse(localStorage.getItem('aransha_products_v5')) || defaultProducts;
 let isAdmin = localStorage.getItem('aransha_is_admin') === 'true';
 
 let files=[]; let active='Semua';
@@ -502,8 +501,8 @@ function detail(code){
 
   // Reset form kalkulasi
   document.getElementById('orderQty').value = isUndanganGroup(p.group) ? 100 : 50;
+  document.getElementById('orderMaterial').value = 'Ivory/Art Carton 230 gsm';
   document.getElementById('orderLamination').value = 'Tanpa Laminasi';
-  document.getElementById('orderFinishing').value = 'Potong Rapi & Lipat';
   document.getElementById('orderSides').value = '2';
 
   calculatePrice();
@@ -520,15 +519,15 @@ function calculatePrice(){
   let qty = parseInt(document.getElementById('orderQty').value) || 1;
   if(qty < 1) qty = 1;
 
+  const material = document.getElementById('orderMaterial').value;
   const lamination = document.getElementById('orderLamination').value;
-  const finishing = document.getElementById('orderFinishing').value;
   const sides = document.getElementById('orderSides').value;
 
-  // Extra cost per pcs berdasarkan finishing
+  // Extra cost per pcs berdasarkan bahan & finishing
   let extraCost = 0;
+  if(material === 'Ivory/Art Carton 260 gsm') extraCost += 200;
   if(lamination === 'Laminasi Doff' || lamination === 'Laminasi Glossy') extraCost += 300;
   if(lamination === 'Foil Emas/Perak') extraCost += 600;
-  if(finishing === 'Pond Custom Shape') extraCost += 200;
   if(sides === '1') extraCost -= 200; // Cetak 1 sisi lebih murah
 
   // Perhitungan Tiering Price (Semakin banyak pesanan ≥ 100 pcs, semakin murah)
@@ -566,12 +565,11 @@ function calculatePrice(){
 📌 Kode: ${p.code} (${p.title})
 🏷️ Kategori: ${catName}
 📏 Ukuran: ${p.size}
-📄 Bahan: ${p.paper}
+📄 Bahan Utama: ${material} (Katalog: ${p.paper})
 ----------------------------------------
 🔢 Jumlah: ${qty} pcs
 🎨 Sisi Cetak: ${sides} Sisi
 ✨ Laminasi: ${lamination}
-✂️ Finishing: ${finishing}
 ----------------------------------------
 💰 Estimasi Total: ${formatRupiah(totalPrice)} (${formatRupiah(baseUnitPrice)}/pcs)
 
@@ -819,7 +817,7 @@ function saveProduct(e){
     products.unshift(newProductData);
   }
   
-  localStorage.setItem('aransha_products_v4', JSON.stringify(products));
+  localStorage.setItem('aransha_products_v5', JSON.stringify(products));
   buildFilters();
   render();
   closeEditModal();
@@ -829,7 +827,7 @@ function saveProduct(e){
 function deleteProduct(code){
   if(confirm('Apakah Anda yakin ingin menghapus produk '+code+'?')){
     products = products.filter(x=>x.code!==code);
-    localStorage.setItem('aransha_products_v4', JSON.stringify(products));
+    localStorage.setItem('aransha_products_v5', JSON.stringify(products));
     buildFilters();
     render();
   }
