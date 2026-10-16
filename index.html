@@ -31,7 +31,6 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
 .wa{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--wa);color:#fff;font-size:28px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:80}.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}.modal.show{display:flex}.modal-box{width:min(900px,100%);max-height:92vh;overflow:auto;background:var(--paper);border-radius:24px;padding:20px;position:relative}.close{position:absolute;right:14px;top:9px;border:0;background:#21180f;color:#fff;width:38px;height:38px;border-radius:50%;font-size:23px;cursor:pointer;z-index:2}.modal-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:24px}.modal-img{height:480px;border-radius:18px;overflow:hidden;background:#eee5d9;position:relative}.modal-img img,.modal-img video{width:100%;height:100%;object-fit:cover}.modal-info{padding:10px 5px}.modal-info small{color:var(--gold);font-weight:900}.modal-info h2{font-family:"Cormorant Garamond",serif;font-size:36px;line-height:1.02;margin:5px 0 10px}.modal-info p{color:var(--muted);font-size:13px}.detail{margin:14px 0;border-top:1px solid var(--line)}.detail div{display:flex;justify-content:space-between;gap:20px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px}.detail strong{color:#6e6154}.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}
 
 .calc-box{background:#f0e9df;border:1px solid var(--line);border-radius:14px;padding:14px;margin:15px 0}
-.calc-box h4{font-size:13px;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
 .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .calc-field{display:flex;flex-direction:column;gap:4px}
 .calc-field label{font-size:11px;font-weight:700;color:var(--muted)}
@@ -39,7 +38,7 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
 .price-summary{background:var(--dark);color:#fff;border-radius:12px;padding:12px;margin-top:12px}
 .price-summary-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
 .price-summary-row.total{font-size:15px;font-weight:800;color:var(--gold2);border-top:1px dashed #44372a;padding-top:6px;margin-top:6px}
-.tier-notice{font-size:10px;color:var(--gold);margin-top:4px;font-weight:600}
+.tier-notice{font-size:10px;color:var(--gold2);margin-top:6px;font-weight:600;line-height:1.4}
 
 .slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(23,18,13,.75);color:#fff;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-weight:bold;font-size:16px;z-index:5}.slider-btn.prev{left:10px}.slider-btn.next{right:10px}.slider-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:5}.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer}.dot.active{background:var(--gold2);width:12px;border-radius:10px}
 .form-group{margin-bottom:14px;text-align:left}.form-group label{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--dark)}.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
@@ -192,7 +191,6 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
 
         <!-- KALKULATOR JUMLAH & PILIHAN BAHAN -->
         <div class="calc-box">
-          <h4>🧮 Kalkulator Pesanan & Pilihan Bahan</h4>
           <div class="calc-grid">
             <div class="calc-field">
               <label for="orderQty">Jumlah Pesanan (Pcs):</label>
@@ -225,18 +223,14 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
 
           <div class="price-summary">
             <div class="price-summary-row">
-              <span>Harga Satuan (Dasar):</span>
-              <span id="calcBasePrice">Rp 2.500</span>
-            </div>
-            <div class="price-summary-row">
-              <span>Harga Satuan Bersih:</span>
+              <span>Harga Satuan:</span>
               <span id="calcUnitPrice">Rp 2.500</span>
             </div>
             <div class="price-summary-row total">
               <span>Total Estimasi Bayar:</span>
               <span id="calcTotalPrice">Rp 250.000</span>
             </div>
-            <div class="tier-notice" id="tierNotice">✨ Pesan ≥ 100 pcs untuk mendapatkan diskon bertingkat!</div>
+            <div class="tier-notice" id="tierNotice">✅ Harga sudah termasuk desain, Plastik dan label cetak nama</div>
           </div>
         </div>
 
@@ -364,7 +358,7 @@ const defaultProducts = [
   { code: 'KH-001', group: 'KH', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 1800, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan acara syukuran khitanan putra Anda.', images: [] }
 ];
 
-let products = JSON.parse(localStorage.getItem('aransha_products_v5')) || defaultProducts;
+let products = JSON.parse(localStorage.getItem('aransha_products_v6')) || defaultProducts;
 let isAdmin = localStorage.getItem('aransha_is_admin') === 'true';
 
 let files=[]; let active='Semua';
@@ -532,32 +526,24 @@ function calculatePrice(){
 
   // Perhitungan Tiering Price (Semakin banyak pesanan ≥ 100 pcs, semakin murah)
   let discountFactor = 1.0;
-  let noticeTxt = '';
 
   if(qty >= 1000){
     discountFactor = 0.85; // Diskon 15%
-    noticeTxt = '🎉 Mantap! Anda mendapatkan Diskon Grosir 15% (≥ 1.000 pcs)';
   } else if(qty >= 500){
     discountFactor = 0.90; // Diskon 10%
-    noticeTxt = '🎉 Mantap! Anda mendapatkan Diskon Grosir 10% (≥ 500 pcs)';
   } else if(qty >= 300){
     discountFactor = 0.95; // Diskon 5%
-    noticeTxt = '🎉 Mantap! Anda mendapatkan Diskon Grosir 5% (≥ 300 pcs)';
   } else if(qty >= 100){
     discountFactor = 1.0; // Harga normal grosir 100 pcs
-    noticeTxt = '✨ Harga grosir standar berlaku untuk pemesanan ≥ 100 pcs.';
   } else {
     discountFactor = 1.15; // Tambahan biaya pesanan kecil < 100 pcs
-    noticeTxt = '⚠️ Jumlah di bawah 100 pcs dikenakan tarif cetak standar.';
   }
 
   const baseUnitPrice = Math.round((base + extraCost) * discountFactor);
   const totalPrice = baseUnitPrice * qty;
 
-  document.getElementById('calcBasePrice').textContent = formatRupiah(base);
   document.getElementById('calcUnitPrice').textContent = formatRupiah(baseUnitPrice) + ' / pcs';
   document.getElementById('calcTotalPrice').textContent = formatRupiah(totalPrice);
-  document.getElementById('tierNotice').textContent = noticeTxt;
 
   // Format Pesan WhatsApp Otomatis
   const catName = CATEGORIES[p.group] || p.group;
@@ -572,6 +558,7 @@ function calculatePrice(){
 ✨ Laminasi: ${lamination}
 ----------------------------------------
 💰 Estimasi Total: ${formatRupiah(totalPrice)} (${formatRupiah(baseUnitPrice)}/pcs)
+✅ (Sudah termasuk desain, Plastik dan label cetak nama)
 
 Mohon info instruksi selanjutnya untuk pengiriman file / desain.`;
 
@@ -817,7 +804,7 @@ function saveProduct(e){
     products.unshift(newProductData);
   }
   
-  localStorage.setItem('aransha_products_v5', JSON.stringify(products));
+  localStorage.setItem('aransha_products_v6', JSON.stringify(products));
   buildFilters();
   render();
   closeEditModal();
@@ -827,7 +814,7 @@ function saveProduct(e){
 function deleteProduct(code){
   if(confirm('Apakah Anda yakin ingin menghapus produk '+code+'?')){
     products = products.filter(x=>x.code!==code);
-    localStorage.setItem('aransha_products_v5', JSON.stringify(products));
+    localStorage.setItem('aransha_products_v6', JSON.stringify(products));
     buildFilters();
     render();
   }
