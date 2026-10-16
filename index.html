@@ -116,10 +116,10 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
     <div class="section-head">
       <div class="kicker">KENAPA ARANSHA MEDIA</div>
       <h2 style="color:#fff">Dibuat untuk Memudahkan</h2>
-      <p style="color:#cfc3b3">Dari memilih desain sampai perhitungan harga grosir otomatis.</p>
+      <p style="color:#cfc3b3"> Dari memilih desain sampai perhitungan harga grosir otomatis.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature"><b>✦ Kategori Terstruktur</b><p>Undangan Pernikahan, Buku Yasin, dan Khitanan terpisah dengan jelas.</p></div>
+      <div class="feature"><b>✦ Kategori Kustom & Fleksibel</b><p>Kategori dapat dibuat dan disesuaikan secara manual dengan mudah lewat panel admin.</p></div>
       <div class="feature"><b>✦ Hitung Otomatis Grosir</b><p>Semakin banyak pesanan (mulai 100 pcs ke atas), harga per lembar akan semakin murah.</p></div>
       <div class="feature"><b>✦ Detail & Pilihan Bahan</b><p>Dapat menentukan opsi bahan Ivory/Art Carton 230 gsm atau 260 gsm.</p></div>
       <div class="feature"><b>✦ Tampilan Responsif</b><p>Sangat nyaman diakses melalui ponsel, tablet, maupun komputer.</p></div>
@@ -148,7 +148,7 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
       </div>
       <div>
         <h3>Kategori Produk</h3>
-        <ul>
+        <ul id="footerCategoryList">
           <li>WD — UNDANGAN PERNIKAHAN</li>
           <li>YS — BUKU YASIN</li>
           <li>KH — UNDANGAN KHITANAN</li>
@@ -216,6 +216,7 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
                 <option value="Tanpa Laminasi">Tanpa Laminasi</option>
                 <option value="Laminasi Doff">Laminasi Doff (+Rp 300)</option>
                 <option value="Laminasi Glossy">Laminasi Glossy (+Rp 300)</option>
+                <option value="Foil Emas/Perak">Foil Emas/Perak (+Rp 600)</option>
               </select>
             </div>
           </div>
@@ -229,7 +230,7 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
               <span>Total Estimasi Bayar:</span>
               <span id="calcTotalPrice">Rp 250.000</span>
             </div>
-            <div class="tier-notice" id="tierNotice">✅ Free Desain, Harga sudah termasuk Plastik dan label</div>
+            <div class="tier-notice" id="tierNotice">✅ Harga sudah termasuk desain, Plastik dan label cetak nama</div>
           </div>
         </div>
 
@@ -261,19 +262,21 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
       <input type="hidden" id="editOriginalCode">
       <div class="form-group">
         <label for="editCode">Kode Produk</label>
-        <input type="text" id="editCode" required placeholder="Contoh: WD-001">
+        <input type="text" id="editCode" required placeholder="Contoh: WD-004">
       </div>
       <div class="form-group">
-        <label for="editGroup">Kategori</label>
-        <select id="editGroup" required onchange="toggleBulkInputByGroup(this.value)">
-          <option value="WD">WD - UNDANGAN PERNIKAHAN</option>
-          <option value="YS">YS - BUKU YASIN</option>
-          <option value="KH">KH - UNDANGAN KHITANAN</option>
+        <label for="editGroupSelect">Kategori Produk</label>
+        <select id="editGroupSelect" required onchange="checkCustomCategory(this)">
+          <option value="WD">UNDANGAN PERNIKAHAN (WD)</option>
+          <option value="YS">BUKU YASIN (YS)</option>
+          <option value="KH">UNDANGAN KHITANAN (KH)</option>
+          <option value="CUSTOM">Lainnya (Ketik Manual)...</option>
         </select>
+        <input type="text" id="editGroupCustom" style="display:none; margin-top:8px;" placeholder="Ketik nama kategori baru...">
       </div>
       <div class="form-group">
         <label for="editTitle">Nama Produk</label>
-        <input type="text" id="editTitle" required placeholder="Contoh: Undangan Jawa Premium">
+        <input type="text" id="editTitle" required placeholder="Contoh: Undangan Eksklusif Gold">
       </div>
       
       <!-- KELOLA FOTO / VIDEO -->
@@ -317,7 +320,7 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
       </div>
 
       <div class="form-group" id="bulkPriceFormGroup">
-        <label for="editBulkPrice">Ket. Minimum Order (Undangan)</label>
+        <label for="editBulkPrice">Ket. Minimum Order</label>
         <input type="text" id="editBulkPrice" placeholder="Minimal 100 pcs (Menyesuaikan jumlah pesanan)">
       </div>
 
@@ -341,23 +344,27 @@ const RAW_BASE='https://raw.githubusercontent.com/hadigitalprinting15-spec/UNDAN
 const WA='6281227267303';
 const ADMIN_PASS = 'admin123';
 
-const CATEGORIES = {
-  'WD': 'UNDANGAN PERNIKAHAN',
-  'YS': 'BUKU YASIN',
-  'KH': 'UNDANGAN KHITANAN'
-};
-
 const defaultProducts = [
-  { code: 'WD-001', group: 'WD', title: 'Undangan Jawa Premium', size: '11,8 × 15,7 cm', paper: 'Ivory', basePrice: 2500, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan pernikahan nuansa Jawa yang elegan dan berkelas.', images: [] },
-  { code: 'WD-002', group: 'WD', title: 'Undangan Wayang Elegan', size: '10 × 15,7 cm', paper: 'Ivory', basePrice: 2200, bulkPrice: 'Minimal 100 pcs', desc: 'Konsep wayang klasik dengan sentuhan mewah.', images: [] },
-  { code: 'WD-003', group: 'WD', title: 'Wedding Classic', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 2000, bulkPrice: 'Minimal 100 pcs', desc: 'Desain pernikahan klasik yang dapat disesuaikan.', images: [] },
-  { code: 'YS-001', group: 'YS', title: 'Buku Yasin Softcover', size: 'Custom', paper: 'Art Paper / HVS', basePrice: 6500, bulkPrice: '', desc: 'Buku Yasin softcover dengan cetakan rapi dan pilihan isi lengkap. Bebas jumlah pesanan.', images: [] },
-  { code: 'YS-002', group: 'YS', title: 'Buku Yasin Softcover Elegan', size: 'Custom', paper: 'Art Carton / RCP', basePrice: 9000, bulkPrice: '', desc: 'Buku Yasin softcover elegan dengan pilihan cetak foil emas/perak.', images: [] },
-  { code: 'YS-003', group: 'YS', title: 'Buku Yasin Premium Bludru', size: 'Custom', paper: 'Cover Bludru / Hardcover', basePrice: 18000, bulkPrice: '', desc: 'Buku Yasin eksklusif dan tahan lama.', images: [] },
-  { code: 'KH-001', group: 'KH', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 1800, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan acara syukuran khitanan putra Anda.', images: [] }
+  { code: 'WD-001', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Jawa Premium', size: '11,8 × 15,7 cm', paper: 'Ivory', basePrice: 2500, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan pernikahan nuansa Jawa yang elegan dan berkelas.', images: [] },
+  { code: 'WD-002', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Wayang Elegan', size: '10 × 15,7 cm', paper: 'Ivory', basePrice: 2200, bulkPrice: 'Minimal 100 pcs', desc: 'Konsep wayang klasik dengan sentuhan mewah.', images: [] },
+  { code: 'WD-003', group: 'UNDANGAN PERNIKAHAN', title: 'Wedding Classic', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 2000, bulkPrice: 'Minimal 100 pcs', desc: 'Desain pernikahan klasik yang dapat disesuaikan.', images: [] },
+  
+  // Katalog Baru dari Link Cloudinary yang Diberikan
+  { code: 'WD-004', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Elegan Gold & Floral', size: '13 x 19 cm', paper: 'Ivory', basePrice: 2600, bulkPrice: 'Minimal 100 pcs', desc: 'Desain pernikahan mewah dengan aksen floral gold eksklusif.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790258279/kj7gw7xm6b81eer01d8a.jpg'] },
+  { code: 'WD-005', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Rustic Minimalis', size: '11 x 19 cm', paper: 'Art Carton', basePrice: 2300, bulkPrice: 'Minimal 100 pcs', desc: 'Tema rustic hangat dengan sentuhan artistik natural.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790258107/y6bkb7pq0deiwdh4jpdr.jpg'] },
+  { code: 'WD-006', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Floral Soft Pink', size: '12 x 18 cm', paper: 'Ivory', basePrice: 2400, bulkPrice: 'Minimal 100 pcs', desc: 'Nuansa romantis warna pastel lembut untuk hari bahagia Anda.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790257924/p1jyvxsalbnyv3iwefpa.jpg'] },
+  { code: 'WD-007', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Classic Vintage', size: '14 x 20 cm', paper: 'Jasmine', basePrice: 3000, bulkPrice: 'Minimal 100 pcs', desc: 'Tampilan klasik mewah dengan kertas bertekstur berkilau.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790257801/gr31ob0r7qsh9oonggk7.jpg'] },
+  { code: 'WD-008', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Modern Luxury', size: '12 x 21 cm', paper: 'Ivory', basePrice: 2800, bulkPrice: 'Minimal 100 pcs', desc: 'Desain modern berkelas tinggi dengan tata letak minimalis.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790257621/tegjy7uot3b5lcowo2mk.jpg'] },
+  { code: 'YS-004', group: 'BUKU YASIN', title: 'Buku Yasin & Tahlil Eksklusif', size: '12 x 15.5 cm', paper: 'Art Paper', basePrice: 8500, bulkPrice: '', desc: 'Buku yasin dan tahlil cetakan tajam dengan sampul berornamen indah.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790257546/o17mduir0nrv58dckvqi.jpg'] },
+  { code: 'KH-002', group: 'UNDANGAN KHITANAN', title: 'Undangan Khitanan Ceria', size: '11 x 18 cm', paper: 'Art Carton', basePrice: 1900, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan syukuran khitanan desain ramah anak penuh warna.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790239150/hqb628qmct2c0lcehzwo.jpg'] },
+
+  { code: 'YS-001', group: 'BUKU YASIN', title: 'Buku Yasin Softcover', size: 'Custom', paper: 'Art Paper / HVS', basePrice: 6500, bulkPrice: '', desc: 'Buku Yasin softcover dengan cetakan rapi dan pilihan isi lengkap. Bebas jumlah pesanan.', images: [] },
+  { code: 'YS-002', group: 'BUKU YASIN', title: 'Buku Yasin Softcover Elegan', size: 'Custom', paper: 'Art Carton / RCP', basePrice: 9000, bulkPrice: '', desc: 'Buku Yasin softcover elegan dengan pilihan cetak foil emas/perak.', images: [] },
+  { code: 'YS-003', group: 'BUKU YASIN', title: 'Buku Yasin Premium Bludru', size: 'Custom', paper: 'Cover Bludru / Hardcover', basePrice: 18000, bulkPrice: '', desc: 'Buku Yasin eksklusif dan tahan lama.', images: [] },
+  { code: 'KH-001', group: 'UNDANGAN KHITANAN', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 1800, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan acara syukuran khitanan putra Anda.', images: [] }
 ];
 
-let products = JSON.parse(localStorage.getItem('aransha_products_v6')) || defaultProducts;
+let products = JSON.parse(localStorage.getItem('aransha_products_v7')) || defaultProducts;
 let isAdmin = localStorage.getItem('aransha_is_admin') === 'true';
 
 let files=[]; let active='Semua';
@@ -383,7 +390,8 @@ function getProductImages(code){
 }
 
 function isUndanganGroup(group){
-  return ['WD', 'KH'].includes(group);
+  const g = String(group || '').toUpperCase();
+  return !g.includes('YASIN');
 }
 
 function updateAdminUI(){
@@ -412,8 +420,8 @@ function renderMediaElement(url, altTxt=''){
 function render(){
   const q=document.getElementById('search').value.trim().toLowerCase();
   const list=products.filter(p=>{
-    const categoryName = CATEGORIES[p.group] || p.group;
-    const matchGroup = (active==='Semua' || p.group===active || categoryName===active);
+    const categoryName = p.group || 'UMUM';
+    const matchGroup = (active==='Semua' || categoryName===active);
     const matchSearch = (p.code+' '+p.title+' '+p.size+' '+p.paper+' '+p.desc+' '+categoryName).toLowerCase().includes(q);
     return matchGroup && matchSearch;
   });
@@ -425,7 +433,7 @@ function render(){
   }
   
   grid.innerHTML=list.map(p=>{
-    const catLabel = CATEGORIES[p.group] || p.group;
+    const catLabel = p.group || 'UMUM';
     const imgs = getProductImages(p.code);
     const mainImg = imgs[0];
     const isUnd = isUndanganGroup(p.group);
@@ -463,9 +471,17 @@ function render(){
 }
 
 function buildFilters(){
-  const uniqueGroups = [...new Set(products.map(p=>p.group))];
-  const filterButtons = ['Semua', ...uniqueGroups.map(g => CATEGORIES[g] || g)];
-  document.getElementById('filters').innerHTML=filterButtons.map(cat=>`<button class="filter ${cat===active?'active':''}" onclick="setGroup('${cat}')">${cat}</button>`).join('');
+  const uniqueGroups = [...new Set(products.map(p => p.group || 'UMUM'))];
+  const filterButtons = ['Semua', ...uniqueGroups];
+  document.getElementById('filters').innerHTML = filterButtons.map(cat => 
+    `<button class="filter ${cat===active?'active':''}" onclick="setGroup('${cat}')">${cat}</button>`
+  ).join('');
+
+  // Update Footer Category List
+  const footerList = document.getElementById('footerCategoryList');
+  if(footerList){
+    footerList.innerHTML = uniqueGroups.map(g => `<li>✦ ${g}</li>`).join('');
+  }
 }
 
 function setGroup(cat){
@@ -480,7 +496,7 @@ function detail(code){
   if(!p)return;
   currentActiveProduct = p;
   
-  const catLabel = CATEGORIES[p.group] || p.group;
+  const catLabel = p.group || 'UMUM';
   document.getElementById('mGroup').textContent=catLabel+' · '+p.code;
   document.getElementById('mTitle').textContent=p.title;
   document.getElementById('mDesc').textContent=p.desc;
@@ -545,7 +561,7 @@ function calculatePrice(){
   document.getElementById('calcTotalPrice').textContent = formatRupiah(totalPrice);
 
   // Format Pesan WhatsApp Otomatis
-  const catName = CATEGORIES[p.group] || p.group;
+  const catName = p.group || 'UMUM';
   const waText = `Halo ARANSHA MEDIA, saya mau order produk cetak:
 📌 Kode: ${p.code} (${p.title})
 🏷️ Kategori: ${catName}
@@ -629,12 +645,15 @@ function logoutAdmin(){
   alert('Anda telah Logout.');
 }
 
-function toggleBulkInputByGroup(group){
-  const bulkGroup = document.getElementById('bulkPriceFormGroup');
-  if(isUndanganGroup(group)){
-    bulkGroup.style.display = 'block';
+function checkCustomCategory(select){
+  const customInput = document.getElementById('editGroupCustom');
+  if(select.value === 'CUSTOM'){
+    customInput.style.display = 'block';
+    customInput.required = true;
+    customInput.focus();
   } else {
-    bulkGroup.style.display = 'none';
+    customInput.style.display = 'none';
+    customInput.required = false;
   }
 }
 
@@ -712,12 +731,25 @@ function openEditModal(code){
   document.getElementById('editModalTitle').textContent = isEdit ? 'Edit Produk' : 'Tambah Produk Baru';
   document.getElementById('editOriginalCode').value = isEdit ? code : '';
   
+  const groupSelect = document.getElementById('editGroupSelect');
+  const groupCustom = document.getElementById('editGroupCustom');
+
   if(isEdit){
     const p = products.find(x=>x.code===code);
     if(!p) return;
     document.getElementById('editCode').value = p.code;
-    document.getElementById('editGroup').value = p.group;
-    toggleBulkInputByGroup(p.group);
+    
+    // Cek apakah kategori ada di opsi standar
+    let matchOpt = Array.from(groupSelect.options).some(opt => opt.text.includes(p.group) || opt.value === p.group);
+    if(matchOpt || p.group === 'UNDANGAN PERNIKAHAN' || p.group === 'BUKU YASIN' || p.group === 'UNDANGAN KHITANAN'){
+      groupSelect.value = (p.group === 'UNDANGAN PERNIKAHAN') ? 'WD' : (p.group === 'BUKU YASIN' ? 'YS' : (p.group === 'UNDANGAN KHITANAN' ? 'KH' : p.group));
+      groupCustom.style.display = 'none';
+      groupCustom.value = '';
+    } else {
+      groupSelect.value = 'CUSTOM';
+      groupCustom.style.display = 'block';
+      groupCustom.value = p.group;
+    }
 
     document.getElementById('editTitle').value = p.title;
     document.getElementById('editSize').value = p.size;
@@ -743,10 +775,11 @@ function openEditModal(code){
     document.getElementById('editDesc').value = p.desc;
   } else {
     document.getElementById('editForm').reset();
+    groupSelect.value = 'WD';
+    groupCustom.style.display = 'none';
     document.getElementById('editPaperCustom').style.display = 'none';
     editMediaList = [];
     renderEditGallery();
-    toggleBulkInputByGroup('WD');
   }
   
   document.getElementById('editModal').classList.add('show');
@@ -771,7 +804,15 @@ function saveProduct(e){
   e.preventDefault();
   const originalCode = document.getElementById('editOriginalCode').value;
   const code = document.getElementById('editCode').value.trim();
-  const group = document.getElementById('editGroup').value;
+  
+  const groupSelectVal = document.getElementById('editGroupSelect').value;
+  const groupCustomVal = document.getElementById('editGroupCustom').value.trim();
+  let group = 'UNDANGAN PERNIKAHAN';
+  if(groupSelectVal === 'WD') group = 'UNDANGAN PERNIKAHAN';
+  else if(groupSelectVal === 'YS') group = 'BUKU YASIN';
+  else if(groupSelectVal === 'KH') group = 'UNDANGAN KHITANAN';
+  else if(groupSelectVal === 'CUSTOM') group = groupCustomVal.toUpperCase();
+
   const title = document.getElementById('editTitle').value.trim();
   const size = document.getElementById('editSize').value.trim();
   const bulkPrice = document.getElementById('editBulkPrice').value.trim() || 'Minimal 100 pcs';
@@ -803,7 +844,7 @@ function saveProduct(e){
     products.unshift(newProductData);
   }
   
-  localStorage.setItem('aransha_products_v6', JSON.stringify(products));
+  localStorage.setItem('aransha_products_v7', JSON.stringify(products));
   buildFilters();
   render();
   closeEditModal();
@@ -813,7 +854,7 @@ function saveProduct(e){
 function deleteProduct(code){
   if(confirm('Apakah Anda yakin ingin menghapus produk '+code+'?')){
     products = products.filter(x=>x.code!==code);
-    localStorage.setItem('aransha_products_v6', JSON.stringify(products));
+    localStorage.setItem('aransha_products_v7', JSON.stringify(products));
     buildFilters();
     render();
   }
@@ -835,7 +876,7 @@ async function loadFiles(){
 }
 
 function setHero(){
-  const wd=products.find(p=>p.group==='WD');
+  const wd=products.find(p=>isUndanganGroup(p.group));
   if(!wd)return;
   const imgs=getProductImages(wd.code);
   document.getElementById('heroPhoto').innerHTML = renderMediaElement(imgs[0], wd.title);
