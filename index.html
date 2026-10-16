@@ -116,12 +116,12 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
     <div class="section-head">
       <div class="kicker">KENAPA ARANSHA MEDIA</div>
       <h2 style="color:#fff">Dibuat untuk Memudahkan</h2>
-      <p style="color:#cfc3b3"> Dari memilih desain sampai perhitungan harga grosir otomatis.</p>
+      <p style="color:#cfc3b3">Dari memilih desain sampai perhitungan harga grosir otomatis.</p>
     </div>
     <div class="feature-grid">
       <div class="feature"><b>✦ Kategori Kustom & Fleksibel</b><p>Kategori dapat dibuat dan disesuaikan secara manual dengan mudah lewat panel admin.</p></div>
       <div class="feature"><b>✦ Hitung Otomatis Grosir</b><p>Semakin banyak pesanan (mulai 100 pcs ke atas), harga per lembar akan semakin murah.</p></div>
-      <div class="feature"><b>✦ Detail & Pilihan Bahan</b><p>Dapat menentukan opsi bahan Ivory/Art Carton 230 gsm atau 260 gsm.</p></div>
+      <div class="feature"><b>✦ Opsi Spesifik Yasin & Undangan</b><p>Menyesuaikan opsi Isi, Cover, dan Halaman untuk Yasin secara dinamis.</p></div>
       <div class="feature"><b>✦ Tampilan Responsif</b><p>Sangat nyaman diakses melalui ponsel, tablet, maupun komputer.</p></div>
     </div>
   </div>
@@ -189,30 +189,37 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
           <div><strong>Bahan Dasar Katalog</strong><span id="mPaper"></span></div>
         </div>
 
-        <!-- KALKULATOR JUMLAH & PILIHAN BAHAN -->
+        <!-- KALKULATOR DINAMIS (YASIN VS UNDANGAN) -->
         <div class="calc-box">
           <div class="calc-grid">
             <div class="calc-field">
               <label for="orderQty">Jumlah Pesanan (Pcs):</label>
               <input type="number" id="orderQty" value="100" min="10" step="10" oninput="calculatePrice()">
             </div>
-            <div class="calc-field">
-              <label for="orderSides">Sisi Cetak:</label>
-              <select id="orderSides" onchange="calculatePrice()">
-                <option value="2">2 Sisi (Bolak-Balik)</option>
-                <option value="1">1 Sisi</option>
+            
+            <!-- FIELD DINAMIS 1 (SISI CETAK / HALAMAN) -->
+            <div class="calc-field" id="fieldContainerOption1">
+              <label id="labelOption1" for="orderOption1">Sisi Cetak:</label>
+              <select id="orderOption1Select" onchange="calculatePrice()">
+                <option value="2 Sisi">2 Sisi (Bolak-Balik)</option>
+                <option value="1 Sisi">1 Sisi</option>
               </select>
+              <input type="text" id="orderOption1Input" value="128 Halaman" style="display:none;" oninput="calculatePrice()">
             </div>
+
+            <!-- FIELD DINAMIS 2 (BAHAN UTAMA / ISI) -->
             <div class="calc-field" style="grid-column: span 2;">
-              <label for="orderMaterial">Pilihan Bahan Utama:</label>
-              <select id="orderMaterial" onchange="calculatePrice()">
+              <label id="labelOption2" for="orderOption2">Pilihan Bahan Utama:</label>
+              <select id="orderOption2Select" onchange="calculatePrice()">
                 <option value="Ivory/Art Carton 230 gsm">Ivory / Art Carton 230 gsm (Standar)</option>
                 <option value="Ivory/Art Carton 260 gsm">Ivory / Art Carton 260 gsm (+Rp 200)</option>
               </select>
             </div>
-            <div class="calc-field" style="grid-column: span 2;">
-              <label for="orderLamination">Finishing Laminasi:</label>
-              <select id="orderLamination" onchange="calculatePrice()">
+
+            <!-- FIELD DINAMIS 3 (LAMINASI / COVER) -->
+            <div class="calc-field" style="grid-column: span 2;" id="fieldContainerOption3">
+              <label id="labelOption3" for="orderOption3">Finishing Laminasi:</label>
+              <select id="orderOption3Select" onchange="calculatePrice()">
                 <option value="Tanpa Laminasi">Tanpa Laminasi</option>
                 <option value="Laminasi Doff">Laminasi Doff (+Rp 300)</option>
                 <option value="Laminasi Glossy">Laminasi Glossy (+Rp 300)</option>
@@ -267,9 +274,9 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
       <div class="form-group">
         <label for="editGroupSelect">Kategori Produk</label>
         <select id="editGroupSelect" required onchange="checkCustomCategory(this)">
-          <option value="WD">UNDANGAN PERNIKAHAN (WD)</option>
-          <option value="YS">BUKU YASIN (YS)</option>
-          <option value="KH">UNDANGAN KHITANAN (KH)</option>
+          <option value="UNDANGAN PERNIKAHAN">UNDANGAN PERNIKAHAN</option>
+          <option value="BUKU YASIN">BUKU YASIN</option>
+          <option value="UNDANGAN KHITANAN">UNDANGAN KHITANAN</option>
           <option value="CUSTOM">Lainnya (Ketik Manual)...</option>
         </select>
         <input type="text" id="editGroupCustom" style="display:none; margin-top:8px;" placeholder="Ketik nama kategori baru...">
@@ -349,7 +356,6 @@ const defaultProducts = [
   { code: 'WD-002', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Wayang Elegan', size: '10 × 15,7 cm', paper: 'Ivory', basePrice: 2200, bulkPrice: 'Minimal 100 pcs', desc: 'Konsep wayang klasik dengan sentuhan mewah.', images: [] },
   { code: 'WD-003', group: 'UNDANGAN PERNIKAHAN', title: 'Wedding Classic', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 2000, bulkPrice: 'Minimal 100 pcs', desc: 'Desain pernikahan klasik yang dapat disesuaikan.', images: [] },
   
-  // Katalog Baru dari Link Cloudinary yang Diberikan
   { code: 'WD-004', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Elegan Gold & Floral', size: '13 x 19 cm', paper: 'Ivory', basePrice: 2600, bulkPrice: 'Minimal 100 pcs', desc: 'Desain pernikahan mewah dengan aksen floral gold eksklusif.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790258279/kj7gw7xm6b81eer01d8a.jpg'] },
   { code: 'WD-005', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Rustic Minimalis', size: '11 x 19 cm', paper: 'Art Carton', basePrice: 2300, bulkPrice: 'Minimal 100 pcs', desc: 'Tema rustic hangat dengan sentuhan artistik natural.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790258107/y6bkb7pq0deiwdh4jpdr.jpg'] },
   { code: 'WD-006', group: 'UNDANGAN PERNIKAHAN', title: 'Undangan Floral Soft Pink', size: '12 x 18 cm', paper: 'Ivory', basePrice: 2400, bulkPrice: 'Minimal 100 pcs', desc: 'Nuansa romantis warna pastel lembut untuk hari bahagia Anda.', images: ['https://res.cloudinary.com/o1w0bczv/image/upload/v1790257924/p1jyvxsalbnyv3iwefpa.jpg'] },
@@ -364,7 +370,7 @@ const defaultProducts = [
   { code: 'KH-001', group: 'UNDANGAN KHITANAN', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 1800, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan acara syukuran khitanan putra Anda.', images: [] }
 ];
 
-let products = JSON.parse(localStorage.getItem('aransha_products_v7')) || defaultProducts;
+let products = JSON.parse(localStorage.getItem('aransha_products_v8')) || defaultProducts;
 let isAdmin = localStorage.getItem('aransha_is_admin') === 'true';
 
 let files=[]; let active='Semua';
@@ -389,9 +395,12 @@ function getProductImages(code){
   return [autoUrl];
 }
 
+function isYasinGroup(group){
+  return String(group || '').toUpperCase().includes('YASIN');
+}
+
 function isUndanganGroup(group){
-  const g = String(group || '').toUpperCase();
-  return !g.includes('YASIN');
+  return !isYasinGroup(group);
 }
 
 function updateAdminUI(){
@@ -477,7 +486,6 @@ function buildFilters(){
     `<button class="filter ${cat===active?'active':''}" onclick="setGroup('${cat}')">${cat}</button>`
   ).join('');
 
-  // Update Footer Category List
   const footerList = document.getElementById('footerCategoryList');
   if(footerList){
     footerList.innerHTML = uniqueGroups.map(g => `<li>✦ ${g}</li>`).join('');
@@ -508,11 +516,64 @@ function detail(code){
   currentSlideIndex = 0;
   renderSlider();
 
-  // Reset form kalkulasi
-  document.getElementById('orderQty').value = isUndanganGroup(p.group) ? 100 : 50;
-  document.getElementById('orderMaterial').value = 'Ivory/Art Carton 230 gsm';
-  document.getElementById('orderLamination').value = 'Tanpa Laminasi';
-  document.getElementById('orderSides').value = '2';
+  // Atur Tampilan Kalkulator Berdasarkan Kategori (Yasin vs Undangan)
+  const isYasin = isYasinGroup(p.group);
+  
+  const labelOpt1 = document.getElementById('labelOption1');
+  const selectOpt1 = document.getElementById('orderOption1Select');
+  const inputOpt1 = document.getElementById('orderOption1Input');
+  
+  const labelOpt2 = document.getElementById('labelOption2');
+  const selectOpt2 = document.getElementById('orderOption2Select');
+  
+  const labelOpt3 = document.getElementById('labelOption3');
+  const selectOpt3 = document.getElementById('orderOption3Select');
+
+  if(isYasin){
+    // Khusus Buku Yasin
+    labelOpt1.textContent = 'Halaman:';
+    selectOpt1.style.display = 'none';
+    inputOpt1.style.display = 'block';
+    inputOpt1.value = '128 Halaman (Contoh)';
+
+    labelOpt2.textContent = 'Isi:';
+    selectOpt2.innerHTML = `
+      <option value="HVS">HVS</option>
+      <option value="Art Paper">Art Paper</option>
+    `;
+
+    labelOpt3.textContent = 'Cover:';
+    selectOpt3.innerHTML = `
+      <option value="Ivory">Ivory</option>
+      <option value="Art Paper">Art Paper</option>
+      <option value="Hard Cover">Hard Cover (+Rp 3.000)</option>
+    `;
+  } else {
+    // Untuk Undangan / Produk Lain
+    labelOpt1.textContent = 'Sisi Cetak:';
+    inputOpt1.style.display = 'none';
+    selectOpt1.style.display = 'block';
+    selectOpt1.innerHTML = `
+      <option value="2 Sisi">2 Sisi (Bolak-Balik)</option>
+      <option value="1 Sisi">1 Sisi</option>
+    `;
+
+    labelOpt2.textContent = 'Pilihan Bahan Utama:';
+    selectOpt2.innerHTML = `
+      <option value="Ivory/Art Carton 230 gsm">Ivory / Art Carton 230 gsm (Standar)</option>
+      <option value="Ivory/Art Carton 260 gsm">Ivory / Art Carton 260 gsm (+Rp 200)</option>
+    `;
+
+    labelOpt3.textContent = 'Finishing Laminasi:';
+    selectOpt3.innerHTML = `
+      <option value="Tanpa Laminasi">Tanpa Laminasi</option>
+      <option value="Laminasi Doff">Laminasi Doff (+Rp 300)</option>
+      <option value="Laminasi Glossy">Laminasi Glossy (+Rp 300)</option>
+      <option value="Foil Emas/Perak">Foil Emas/Perak (+Rp 600)</option>
+    `;
+  }
+
+  document.getElementById('orderQty').value = isUndanganGroup(p.group) ? 100 : 20;
 
   calculatePrice();
 
@@ -528,30 +589,28 @@ function calculatePrice(){
   let qty = parseInt(document.getElementById('orderQty').value) || 1;
   if(qty < 1) qty = 1;
 
-  const material = document.getElementById('orderMaterial').value;
-  const lamination = document.getElementById('orderLamination').value;
-  const sides = document.getElementById('orderSides').value;
+  const isYasin = isYasinGroup(p.group);
+  const opt2 = document.getElementById('orderOption2Select').value;
+  const opt3 = document.getElementById('orderOption3Select').value;
+  const opt1Val = isYasin ? document.getElementById('orderOption1Input').value : document.getElementById('orderOption1Select').value;
 
-  // Extra cost per pcs berdasarkan bahan & finishing
   let extraCost = 0;
-  if(material === 'Ivory/Art Carton 260 gsm') extraCost += 200;
-  if(lamination === 'Laminasi Doff' || lamination === 'Laminasi Glossy') extraCost += 300;
-  if(lamination === 'Foil Emas/Perak') extraCost += 600;
-  if(sides === '1') extraCost -= 200; // Cetak 1 sisi lebih murah
-
-  // Perhitungan Tiering Price (Semakin banyak pesanan ≥ 100 pcs, semakin murah)
-  let discountFactor = 1.0;
-
-  if(qty >= 1000){
-    discountFactor = 0.85; // Diskon 15%
-  } else if(qty >= 500){
-    discountFactor = 0.90; // Diskon 10%
-  } else if(qty >= 300){
-    discountFactor = 0.95; // Diskon 5%
-  } else if(qty >= 100){
-    discountFactor = 1.0; // Harga normal grosir 100 pcs
+  if(isYasin){
+    if(opt3 === 'Hard Cover') extraCost += 3000;
   } else {
-    discountFactor = 1.15; // Tambahan biaya pesanan kecil < 100 pcs
+    if(opt2 === 'Ivory/Art Carton 260 gsm') extraCost += 200;
+    if(opt3 === 'Laminasi Doff' || opt3 === 'Laminasi Glossy') extraCost += 300;
+    if(opt3 === 'Foil Emas/Perak') extraCost += 600;
+    if(opt1Val === '1 Sisi') extraCost -= 200;
+  }
+
+  // Perhitungan Diskon Grosir (Tiering untuk Undangan)
+  let discountFactor = 1.0;
+  if(isUndanganGroup(p.group)){
+    if(qty >= 1000) discountFactor = 0.85;
+    else if(qty >= 500) discountFactor = 0.90;
+    else if(qty >= 300) discountFactor = 0.95;
+    else if(qty < 100) discountFactor = 1.15;
   }
 
   const baseUnitPrice = Math.round((base + extraCost) * discountFactor);
@@ -562,20 +621,39 @@ function calculatePrice(){
 
   // Format Pesan WhatsApp Otomatis
   const catName = p.group || 'UMUM';
-  const waText = `Halo ARANSHA MEDIA, saya mau order produk cetak:
+  let waText = '';
+
+  if(isYasin){
+    waText = `Halo ARANSHA MEDIA, saya mau order buku yasin:
 📌 Kode: ${p.code} (${p.title})
 🏷️ Kategori: ${catName}
 📏 Ukuran: ${p.size}
-📄 Bahan Utama: ${material} (Katalog: ${p.paper})
 ----------------------------------------
 🔢 Jumlah: ${qty} pcs
-🎨 Sisi Cetak: ${sides} Sisi
-✨ Laminasi: ${lamination}
+📖 Halaman: ${opt1Val}
+📄 Isi: ${opt2}
+📔 Cover: ${opt3}
 ----------------------------------------
 💰 Estimasi Total: ${formatRupiah(totalPrice)} (${formatRupiah(baseUnitPrice)}/pcs)
 ✅ (Sudah termasuk desain, Plastik dan label cetak nama)
 
 Mohon info instruksi selanjutnya untuk pengiriman file / desain.`;
+  } else {
+    waText = `Halo ARANSHA MEDIA, saya mau order produk cetak:
+📌 Kode: ${p.code} (${p.title})
+🏷️ Kategori: ${catName}
+📏 Ukuran: ${p.size}
+📄 Bahan Utama: ${opt2} (Katalog: ${p.paper})
+----------------------------------------
+🔢 Jumlah: ${qty} pcs
+🎨 Sisi Cetak: ${opt1Val}
+✨ Laminasi: ${opt3}
+----------------------------------------
+💰 Estimasi Total: ${formatRupiah(totalPrice)} (${formatRupiah(baseUnitPrice)}/pcs)
+✅ (Sudah termasuk desain, Plastik dan label cetak nama)
+
+Mohon info instruksi selanjutnya untuk pengiriman file / desain.`;
+  }
 
   document.getElementById('mWa').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waText);
 }
@@ -739,10 +817,9 @@ function openEditModal(code){
     if(!p) return;
     document.getElementById('editCode').value = p.code;
     
-    // Cek apakah kategori ada di opsi standar
-    let matchOpt = Array.from(groupSelect.options).some(opt => opt.text.includes(p.group) || opt.value === p.group);
-    if(matchOpt || p.group === 'UNDANGAN PERNIKAHAN' || p.group === 'BUKU YASIN' || p.group === 'UNDANGAN KHITANAN'){
-      groupSelect.value = (p.group === 'UNDANGAN PERNIKAHAN') ? 'WD' : (p.group === 'BUKU YASIN' ? 'YS' : (p.group === 'UNDANGAN KHITANAN' ? 'KH' : p.group));
+    let matchOpt = Array.from(groupSelect.options).some(opt => opt.value === p.group);
+    if(matchOpt){
+      groupSelect.value = p.group;
       groupCustom.style.display = 'none';
       groupCustom.value = '';
     } else {
@@ -775,7 +852,7 @@ function openEditModal(code){
     document.getElementById('editDesc').value = p.desc;
   } else {
     document.getElementById('editForm').reset();
-    groupSelect.value = 'WD';
+    groupSelect.value = 'UNDANGAN PERNIKAHAN';
     groupCustom.style.display = 'none';
     document.getElementById('editPaperCustom').style.display = 'none';
     editMediaList = [];
@@ -808,10 +885,8 @@ function saveProduct(e){
   const groupSelectVal = document.getElementById('editGroupSelect').value;
   const groupCustomVal = document.getElementById('editGroupCustom').value.trim();
   let group = 'UNDANGAN PERNIKAHAN';
-  if(groupSelectVal === 'WD') group = 'UNDANGAN PERNIKAHAN';
-  else if(groupSelectVal === 'YS') group = 'BUKU YASIN';
-  else if(groupSelectVal === 'KH') group = 'UNDANGAN KHITANAN';
-  else if(groupSelectVal === 'CUSTOM') group = groupCustomVal.toUpperCase();
+  if(groupSelectVal === 'CUSTOM') group = groupCustomVal.toUpperCase();
+  else group = groupSelectVal;
 
   const title = document.getElementById('editTitle').value.trim();
   const size = document.getElementById('editSize').value.trim();
@@ -844,7 +919,7 @@ function saveProduct(e){
     products.unshift(newProductData);
   }
   
-  localStorage.setItem('aransha_products_v7', JSON.stringify(products));
+  localStorage.setItem('aransha_products_v8', JSON.stringify(products));
   buildFilters();
   render();
   closeEditModal();
@@ -854,7 +929,7 @@ function saveProduct(e){
 function deleteProduct(code){
   if(confirm('Apakah Anda yakin ingin menghapus produk '+code+'?')){
     products = products.filter(x=>x.code!==code);
-    localStorage.setItem('aransha_products_v7', JSON.stringify(products));
+    localStorage.setItem('aransha_products_v8', JSON.stringify(products));
     buildFilters();
     render();
   }
