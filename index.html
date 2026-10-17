@@ -44,12 +44,6 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
 .form-group{margin-bottom:14px;text-align:left}.form-group label{display:block;font-size:12px;font-weight:700;margin-bottom:5px;color:var(--dark)}.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
 .gallery-manage{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-top:10px}.gallery-thumb{position:relative;height:90px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#000}.gallery-thumb img,.gallery-thumb video{width:100%;height:100%;object-fit:cover}.gallery-thumb-remove{position:absolute;top:3px;right:3px;background:rgba(217,83,79,.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
 .upload-loading{font-size:12px;color:var(--gold);font-weight:bold;margin-top:5px;display:none;}
-
-/* Kontrol Tampilan Harga Satuan: Default Tersembunyi (Mode Pengunjung), Muncul Otomatis saat Mode Admin */
-.admin-only-price { display: none; }
-body.is-admin .admin-only-price { display: flex !important; }
-body.is-admin .card-price-display { display: block !important; }
-
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-card{max-width:560px;margin:auto}.grid{grid-template-columns:repeat(2,1fr)}.feature-grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.menu{display:block}.modal-grid{grid-template-columns:1fr}.modal-img{height:340px}}
 @media(max-width:560px){.hero{padding:65px 0}.hero h1{font-size:54px}.grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}.product-img{height:390px}.section-head h2{font-size:40px}.toolbar{align-items:stretch}.filters{width:100%}.filter{flex:1}.actions{grid-template-columns:1fr}.cta-box{padding:35px 20px}.cta-box h2{font-size:38px}.footer-grid{grid-template-columns:1fr}.modal-img{height:280px}.calc-grid{grid-template-columns:1fr}}
 </style>
@@ -108,6 +102,7 @@ body.is-admin .card-price-display { display: block !important; }
       <p>Pilih kategori untuk memfilter pencarian berdasarkan kebutuhan acara Anda.</p>
     </div>
     <div class="toolbar">
+      <!-- Search input disembunyikan -->
       <div class="search" style="display:none;">
         <input id="search" type="search" placeholder="Cari kode, nama, ukuran, atau bahan..." oninput="render()">
       </div>
@@ -195,7 +190,7 @@ body.is-admin .card-price-display { display: block !important; }
           <div><strong>Bahan Dasar Katalog</strong><span id="mPaper"></span></div>
         </div>
 
-        <!-- KALKULATOR DINAMIS -->
+        <!-- KALKULATOR DINAMIS (YASIN VS UNDANGAN) -->
         <div class="calc-box">
           <div class="calc-grid">
             <div class="calc-field">
@@ -203,26 +198,39 @@ body.is-admin .card-price-display { display: block !important; }
               <input type="number" id="orderQty" value="100" min="10" step="10" oninput="calculatePrice()">
             </div>
             
+            <!-- FIELD DINAMIS 1 (SISI CETAK / HALAMAN) -->
             <div class="calc-field" id="fieldContainerOption1">
               <label id="labelOption1" for="orderOption1">Sisi Cetak:</label>
-              <select id="orderOption1Select" onchange="calculatePrice()"></select>
+              <select id="orderOption1Select" onchange="calculatePrice()">
+                <option value="2 Sisi">2 Sisi (Bolak-Balik)</option>
+                <option value="1 Sisi">1 Sisi</option>
+              </select>
               <input type="text" id="orderOption1Input" value="128 Halaman" style="display:none;" oninput="calculatePrice()">
             </div>
 
+            <!-- FIELD DINAMIS 2 (BAHAN UTAMA / ISI) -->
             <div class="calc-field" style="grid-column: span 2;">
               <label id="labelOption2" for="orderOption2">Pilihan Bahan Utama:</label>
-              <select id="orderOption2Select" onchange="calculatePrice()"></select>
+              <select id="orderOption2Select" onchange="calculatePrice()">
+                <option value="Ivory/Art Carton 230 gsm">Ivory / Art Carton 230 gsm (Standar)</option>
+                <option value="Ivory/Art Carton 260 gsm">Ivory / Art Carton 260 gsm (+Rp 200)</option>
+              </select>
             </div>
 
+            <!-- FIELD DINAMIS 3 (LAMINASI / COVER) -->
             <div class="calc-field" style="grid-column: span 2;" id="fieldContainerOption3">
               <label id="labelOption3" for="orderOption3">Finishing Laminasi:</label>
-              <select id="orderOption3Select" onchange="calculatePrice()"></select>
+              <select id="orderOption3Select" onchange="calculatePrice()">
+                <option value="Tanpa Laminasi">Tanpa Laminasi</option>
+                <option value="Laminasi Doff">Laminasi Doff (+Rp 300)</option>
+                <option value="Laminasi Glossy">Laminasi Glossy (+Rp 300)</option>
+                <option value="Foil Emas/Perak">Foil Emas/Perak (+Rp 600)</option>
+              </select>
             </div>
           </div>
 
           <div class="price-summary">
-            <!-- Harga Satuan Otomatis Muncul di Mode Admin -->
-            <div class="price-summary-row admin-only-price">
+            <div class="price-summary-row">
               <span>Harga Satuan:</span>
               <span id="calcUnitPrice">Rp 2.500</span>
             </div>
@@ -279,6 +287,7 @@ body.is-admin .card-price-display { display: block !important; }
         <input type="text" id="editTitle" required placeholder="Contoh: Undangan Eksklusif Gold">
       </div>
       
+      <!-- KELOLA FOTO / VIDEO -->
       <div class="form-group">
         <label for="editMediaUrl">Kelola Media Produk (Foto & Video MP4)</label>
         <div style="display:flex; gap:8px;">
@@ -333,6 +342,7 @@ body.is-admin .card-price-display { display: block !important; }
 </div>
 
 <script>
+// === KONFIGURASI CLOUDINARY ===
 const CLOUDINARY_CLOUD_NAME = 'o1w0bczv'; 
 const CLOUDINARY_UPLOAD_PRESET = 'oizwqsrr'; 
 
@@ -361,7 +371,7 @@ const defaultProducts = [
   { code: 'KH-001', group: 'UNDANGAN KHITANAN', title: 'Undangan Khitanan Elegan', size: 'Custom', paper: 'Sesuai pilihan', basePrice: 1800, bulkPrice: 'Minimal 100 pcs', desc: 'Undangan acara syukuran khitanan putra Anda.', images: [] }
 ];
 
-let products = JSON.parse(localStorage.getItem('aransha_products_v11')) || defaultProducts;
+let products = JSON.parse(localStorage.getItem('aransha_products_v9')) || defaultProducts;
 let isAdmin = localStorage.getItem('aransha_is_admin') === 'true';
 
 let files=[]; let active='Semua';
@@ -400,12 +410,10 @@ function updateAdminUI(){
   const logoutBtn = document.getElementById('adminLogoutBtn');
   
   if(isAdmin){
-    document.body.classList.add('is-admin');
     if(loginBtn) loginBtn.style.display = 'none';
     if(addBtn) addBtn.style.display = 'inline-block';
     if(logoutBtn) logoutBtn.style.display = 'inline-block';
   } else {
-    document.body.classList.remove('is-admin');
     if(loginBtn) loginBtn.style.display = 'inline-block';
     if(addBtn) addBtn.style.display = 'none';
     if(logoutBtn) logoutBtn.style.display = 'none';
@@ -422,7 +430,8 @@ function renderMediaElement(url, altTxt=''){
 function render(){
   const list=products.filter(p=>{
     const categoryName = p.group || 'UMUM';
-    return (active==='Semua' || categoryName===active);
+    const matchGroup = (active==='Semua' || categoryName===active);
+    return matchGroup;
   });
   
   const grid=document.getElementById('productGrid');
@@ -454,7 +463,7 @@ function render(){
           <span class="chip">${p.size}</span>
           <span class="chip">${p.paper}</span>
         </div>
-        <div class="price card-price-display" style="display:none;">${displayPrice}</div>
+        <div class="price">${displayPrice}</div>
         ${isUnd ? `<span class="qty-badge">🏷️ ${bulkTxt} (Semakin banyak lebih murah)</span>` : ''}
         <div class="actions">
           <button class="btn btn-dark" onclick="detail('${p.code}')">Detail / Order</button>
@@ -506,6 +515,7 @@ function detail(code){
   currentSlideIndex = 0;
   renderSlider();
 
+  // Atur Tampilan Kalkulator Berdasarkan Kategori (Yasin vs Undangan)
   const isYasin = isYasinGroup(p.group);
   
   const labelOpt1 = document.getElementById('labelOption1');
@@ -519,6 +529,7 @@ function detail(code){
   const selectOpt3 = document.getElementById('orderOption3Select');
 
   if(isYasin){
+    // Khusus Buku Yasin
     labelOpt1.textContent = 'Halaman:';
     selectOpt1.style.display = 'none';
     inputOpt1.style.display = 'block';
@@ -534,9 +545,10 @@ function detail(code){
     selectOpt3.innerHTML = `
       <option value="Ivory">Ivory</option>
       <option value="Art Paper">Art Paper</option>
-      <option value="Hard Cover">Hard Cover${isAdmin ? ' (+Rp 3.000)' : ''}</option>
+      <option value="Hard Cover">Hard Cover (+Rp 3.000)</option>
     `;
   } else {
+    // Untuk Undangan / Produk Lain
     labelOpt1.textContent = 'Sisi Cetak:';
     inputOpt1.style.display = 'none';
     selectOpt1.style.display = 'block';
@@ -548,15 +560,15 @@ function detail(code){
     labelOpt2.textContent = 'Pilihan Bahan Utama:';
     selectOpt2.innerHTML = `
       <option value="Ivory/Art Carton 230 gsm">Ivory / Art Carton 230 gsm (Standar)</option>
-      <option value="Ivory/Art Carton 260 gsm">Ivory / Art Carton 260 gsm${isAdmin ? ' (+Rp 200)' : ''}</option>
+      <option value="Ivory/Art Carton 260 gsm">Ivory / Art Carton 260 gsm (+Rp 200)</option>
     `;
 
     labelOpt3.textContent = 'Finishing Laminasi:';
     selectOpt3.innerHTML = `
       <option value="Tanpa Laminasi">Tanpa Laminasi</option>
-      <option value="Laminasi Doff">Laminasi Doff${isAdmin ? ' (+Rp 300)' : ''}</option>
-      <option value="Laminasi Glossy">Laminasi Glossy${isAdmin ? ' (+Rp 300)' : ''}</option>
-      <option value="Foil Emas/Perak">Foil Emas/Perak${isAdmin ? ' (+Rp 600)' : ''}</option>
+      <option value="Laminasi Doff">Laminasi Doff (+Rp 300)</option>
+      <option value="Laminasi Glossy">Laminasi Glossy (+Rp 300)</option>
+      <option value="Foil Emas/Perak">Foil Emas/Perak (+Rp 600)</option>
     `;
   }
 
@@ -585,12 +597,13 @@ function calculatePrice(){
   if(isYasin){
     if(opt3 === 'Hard Cover') extraCost += 3000;
   } else {
-    if(opt2.includes('260 gsm')) extraCost += 200;
-    if(opt3.includes('Doff') || opt3.includes('Glossy')) extraCost += 300;
-    if(opt3.includes('Foil')) extraCost += 600;
+    if(opt2 === 'Ivory/Art Carton 260 gsm') extraCost += 200;
+    if(opt3 === 'Laminasi Doff' || opt3 === 'Laminasi Glossy') extraCost += 300;
+    if(opt3 === 'Foil Emas/Perak') extraCost += 600;
     if(opt1Val === '1 Sisi') extraCost -= 200;
   }
 
+  // Perhitungan Diskon Grosir (Tiering untuk Undangan)
   let discountFactor = 1.0;
   if(isUndanganGroup(p.group)){
     if(qty >= 1000) discountFactor = 0.85;
@@ -605,6 +618,7 @@ function calculatePrice(){
   document.getElementById('calcUnitPrice').textContent = formatRupiah(baseUnitPrice) + ' / pcs';
   document.getElementById('calcTotalPrice').textContent = formatRupiah(totalPrice);
 
+  // Format Pesan WhatsApp Otomatis
   const catName = p.group || 'UMUM';
   let waText = '';
 
@@ -619,7 +633,7 @@ function calculatePrice(){
 📄 Isi: ${opt2}
 📔 Cover: ${opt3}
 ----------------------------------------
-💰 Estimasi Total: ${formatRupiah(totalPrice)}
+💰 Estimasi Total: ${formatRupiah(totalPrice)} (${formatRupiah(baseUnitPrice)}/pcs)
 ✅ (Sudah termasuk desain, Plastik dan label cetak nama)
 
 Mohon info instruksi selanjutnya untuk pengiriman file / desain.`;
@@ -634,7 +648,7 @@ Mohon info instruksi selanjutnya untuk pengiriman file / desain.`;
 🎨 Sisi Cetak: ${opt1Val}
 ✨ Laminasi: ${opt3}
 ----------------------------------------
-💰 Estimasi Total: ${formatRupiah(totalPrice)}
+💰 Estimasi Total: ${formatRupiah(totalPrice)} (${formatRupiah(baseUnitPrice)}/pcs)
 ✅ (Sudah termasuk desain, Plastik dan label cetak nama)
 
 Mohon info instruksi selanjutnya untuk pengiriman file / desain.`;
@@ -694,7 +708,6 @@ function loginAdmin(){
     localStorage.setItem('aransha_is_admin', 'true');
     updateAdminUI();
     render();
-    if(currentActiveProduct) detail(currentActiveProduct.code);
     closeLoginModal();
     alert('Berhasil Login sebagai Admin!');
   } else {
@@ -706,7 +719,6 @@ function logoutAdmin(){
   localStorage.setItem('aransha_is_admin', 'false');
   updateAdminUI();
   render();
-  if(currentActiveProduct) detail(currentActiveProduct.code);
   alert('Anda telah Logout.');
 }
 
@@ -906,7 +918,7 @@ function saveProduct(e){
     products.unshift(newProductData);
   }
   
-  localStorage.setItem('aransha_products_v11', JSON.stringify(products));
+  localStorage.setItem('aransha_products_v9', JSON.stringify(products));
   buildFilters();
   render();
   closeEditModal();
@@ -916,7 +928,7 @@ function saveProduct(e){
 function deleteProduct(code){
   if(confirm('Apakah Anda yakin ingin menghapus produk '+code+'?')){
     products = products.filter(x=>x.code!==code);
-    localStorage.setItem('aransha_products_v11', JSON.stringify(products));
+    localStorage.setItem('aransha_products_v9', JSON.stringify(products));
     buildFilters();
     render();
   }
