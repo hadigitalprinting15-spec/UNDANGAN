@@ -45,7 +45,7 @@ footer{background:#17120d;color:#cfc5b8;padding:48px 0}.footer-grid{display:grid
 .gallery-manage{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin-top:10px}.gallery-thumb{position:relative;height:90px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#000}.gallery-thumb img,.gallery-thumb video{width:100%;height:100%;object-fit:cover}.gallery-thumb-remove{position:absolute;top:3px;right:3px;background:rgba(217,83,79,.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
 .upload-loading{font-size:12px;color:var(--gold);font-weight:bold;margin-top:5px;display:none;}
 
-/* Pengaturan Visibilitas Khusus Admin */
+/* Kontrol Tampilan Harga Satuan: Default Tersembunyi (Mode Pengunjung), Muncul Otomatis saat Mode Admin */
 .admin-only-price { display: none; }
 body.is-admin .admin-only-price { display: flex !important; }
 body.is-admin .card-price-display { display: block !important; }
@@ -221,14 +221,14 @@ body.is-admin .card-price-display { display: block !important; }
           </div>
 
           <div class="price-summary">
-            <!-- Harga Satuan Otomatis Terupdate & Tampil Khusus Admin -->
+            <!-- Harga Satuan Otomatis Muncul di Mode Admin -->
             <div class="price-summary-row admin-only-price">
               <span>Harga Satuan:</span>
-              <span id="calcUnitPrice">Rp 0</span>
+              <span id="calcUnitPrice">Rp 2.500</span>
             </div>
             <div class="price-summary-row total">
               <span>Total Estimasi Bayar:</span>
-              <span id="calcTotalPrice">Rp 0</span>
+              <span id="calcTotalPrice">Rp 250.000</span>
             </div>
             <div class="tier-notice" id="tierNotice">✅ Harga sudah termasuk desain, Plastik dan label cetak nama</div>
           </div>
@@ -602,7 +602,6 @@ function calculatePrice(){
   const baseUnitPrice = Math.round((base + extraCost) * discountFactor);
   const totalPrice = baseUnitPrice * qty;
 
-  // Harga satuan otomatis di-update dan ditampilkan saat mode admin aktif
   document.getElementById('calcUnitPrice').textContent = formatRupiah(baseUnitPrice) + ' / pcs';
   document.getElementById('calcTotalPrice').textContent = formatRupiah(totalPrice);
 
